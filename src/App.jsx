@@ -3,16 +3,22 @@ import './App.css'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ArticleList from './components/ArticleList'
+import { Route, Routes } from 'react-router'
+import TopicPage from './components/TopicPage'
 
 function App() {
 
   return (
-    <div className='app'>
+    <div className='app h-screen flex flex-col justify-between'>
       <Navbar/>
-      <div className='text-center text-red-600 font-black'>
+      <div className='mt-28 text-center text-red-600 font-black mt-10 text-2xl md:text-4xl'>
         <h1>Welcome to NC-news</h1>
       </div>
-      <ArticleList/>
+
+      <Routes>
+        <Route path='/' element={<ArticleList/>}/>
+        <Route path='/topic' element={<TopicPage/>}/>
+      </Routes>
       <Footer/>
     </div>
   )
