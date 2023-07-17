@@ -9,7 +9,7 @@ import TopicPage from './components/TopicPage'
 function App() {
 
   return (
-    <div className='app h-screen'>
+    <div className='app h-screen flex flex-col justify-between'>
       <Navbar/>
       <div className='mt-28 text-center text-red-600 font-black mt-10 text-2xl md:text-4xl'>
         <h1>Welcome to NC-news</h1>
