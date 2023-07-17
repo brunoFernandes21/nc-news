@@ -11,7 +11,7 @@ function App() {
   return (
     <div className='app'>
       <Navbar/>
-      <div className='text-center text-red-600 font-black mt-10 text-2xl'>
+      <div className='text-center text-red-600 font-black mt-10 text-2xl md:text-4xl'>
         <h1>Welcome to NC-news</h1>
       </div>
 
