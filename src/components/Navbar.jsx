@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom"
 const Navbar = () => {
   return (
-    <div className='bg-red-600 shadow-md shadow-black top-0 sticky z-50 w-full h-20 flex justify-between items-center text-white font-black p-10'>
+    <div className='bg-red-600 shadow-md shadow-black top-0 fixed z-50 w-full h-20 flex justify-between items-center text-white font-black p-10'>
         <div>
           <Link className='text-2xl md:text-3xl' to={"/"}>NC NEWS</Link>
         </div>
