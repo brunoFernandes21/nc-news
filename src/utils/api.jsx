@@ -6,14 +6,12 @@ const articlesApi = axios.create({
 
 export const fetchAllArticles = async () => {
   const response = await articlesApi.get("/articles")
-  const responseData = response
-  const articles = responseData.data.articles
+  const articles = response.data.articles
   return articles
 }
 
 export const fetchSingleArticle = async (article_id) => {
   const response = await articlesApi.get(`/articles/${article_id}`)
-  const responseData = response
-  const article = responseData.data.article
+  const article = response.data.article
   return article
 }
