@@ -15,3 +15,9 @@ export const fetchSingleArticle = async (article_id) => {
   const article = response.data.article
   return article
 }
+
+export const fetchCommentsByArticleId = async (article_id) => {
+  const response = await articlesApi.get(`/articles/${article_id}/comments`)
+  const comments = response.data.comments
+  return comments
+}

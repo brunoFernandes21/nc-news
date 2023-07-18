@@ -18,7 +18,7 @@ const ArticleList = () => {
 
   return (
     <div>
-      <div className="mt-28 text-center text-red-600 font-black mt-10 text-2xl md:text-4xl">
+      <div className="mt-24 md:mt-32 text-center text-red-600 font-black text-xl md:text-2xl lg:text-4xl">
         <h1>Welcome to Northcoders-News</h1>
       </div>
       {loading && (
@@ -27,7 +27,7 @@ const ArticleList = () => {
         </h2>
       )}
       {!loading && (
-        <main className="grid gap-4 w-11/12 m-auto mt-5 p-4 md:grid-cols-2 lg:grid-cols-3">
+        <main className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
             ({ title, author, topic, votes, article_id, article_img_url }) => {
               return (

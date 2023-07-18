@@ -7,7 +7,7 @@ const ArticleCard = ({ title, author, topic, votes, article_img_url, article_id 
     navigate(`/articles/${article_id}`)
   }
   return (
-    <section className="bg-red-500 shadow-lg shadow-red-500/50 text-white  rounded-lg cursor-pointer ease-in duration-300 hover:scale-105" onClick={navigateTo}>
+    <div className="bg-red-500 shadow-lg shadow-red-500/50 text-white  rounded-lg cursor-pointer ease-in duration-300 hover:scale-105" onClick={navigateTo}>
       <img
         className="rounded-t-lg"
         src={article_img_url}
@@ -27,7 +27,7 @@ const ArticleCard = ({ title, author, topic, votes, article_img_url, article_id 
           <strong>votes:</strong> {votes}
         </p>
       </div>
-    </section>
+    </div>
   );
 };
 
