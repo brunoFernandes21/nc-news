@@ -27,7 +27,7 @@ const ArticleList = () => {
         </h2>
       )}
       {!loading && (
-        <main className="grid gap-4 w-11/12 m-auto mt-5 p-4 md:grid-cols-2 lg:grid-cols-3">
+        <main className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
             ({ title, author, topic, votes, article_id, article_img_url }) => {
               return (
