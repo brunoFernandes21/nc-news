@@ -31,8 +31,8 @@ const SingleArticle = () => {
         </h2>
       )}
       {!loading && (
-        <div>
-          <div className="w-11/12 m-auto mt-20 text-center ">
+        <div className="mt-14 md:mt-20">
+          <div className="w-11/12 m-auto text-center ">
             <p>
               <strong>Published </strong> {article_date}
             </p>
