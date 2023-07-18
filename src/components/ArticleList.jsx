@@ -18,7 +18,7 @@ const ArticleList = () => {
 
   return (
     <div>
-      <div className="mt-24 md:mt-32 text-center text-red-600 font-black text-2xl md:text-4xl">
+      <div className="mt-24 md:mt-32 text-center text-red-600 font-black text-xl md:text-2xl lg:text-4xl">
         <h1>Welcome to Northcoders-News</h1>
       </div>
       {loading && (
