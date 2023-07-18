@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
-import fetchAllArticles from "../utils/api";
+import { fetchAllArticles } from "../utils/api";
+
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
+    document.title = "Home";
     setLoading(true);
     const getAllArticles = async () => {
       const articles = await fetchAllArticles();
@@ -16,13 +18,21 @@ const ArticleList = () => {
 
   return (
     <div>
-      {loading && <h2 className='text-center text-red-600 font-black mt-10 text-2xl md:text-4xl'>Loading Articles...</h2>}
+      <div className="mt-28 text-center text-red-600 font-black mt-10 text-2xl md:text-4xl">
+        <h1>Welcome to Northcoders-News</h1>
+      </div>
+      {loading && (
+        <h2 className="text-center text-red-600 font-black mt-10 text-2xl md:text-4xl">
+          Loading Articles...
+        </h2>
+      )}
       {!loading && (
-        <div className="grid gap-4 w-4/5 m-auto mt-5 p-4 md:grid-cols-2 lg:grid-cols-3">
+        <main className="grid gap-4 w-11/12 m-auto mt-5 p-4 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
             ({ title, author, topic, votes, article_id, article_img_url }) => {
               return (
                 <ArticleCard
+                  article_id={article_id}
                   key={article_id}
                   title={title}
                   author={author}
@@ -33,7 +43,7 @@ const ArticleList = () => {
               );
             }
           )}
-        </div>
+        </main>
       )}
     </div>
   );
