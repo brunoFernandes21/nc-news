@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchSingleArticle } from "../utils/api";
 import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import CommentList from "./CommentList";
 const SingleArticle = () => {
 
   const [article, setArticle] = useState({});
@@ -23,8 +24,7 @@ const SingleArticle = () => {
   }, []);
 
   return (
-    // const { title, author, body} = article
-    <div>
+    <div className="mt-10">
       {loading && (
         <h2 className="text-center text-red-600 font-black mt-20 text-2xl md:text-4xl">
           Loading Article...
@@ -46,7 +46,7 @@ const SingleArticle = () => {
             </p>
           </div>
           <main className="w-11/12 mt-5 m-auto md:w-11/12 lg:w-3/5 ">
-            <section className="grid bg-red-500 shadow-lg shadow-red-500/50 text-white rounded-t-lg md:rounded-none md:grid-cols-2">
+            <section className="grid bg-red-500 shadow-md hover:shadow-black ease-in duration-300 text-white rounded-t-lg md:rounded-none md:grid-cols-2">
               <img
                 className="rounded-t-lg md:rounded-none "
                 src={article.article_img_url}
@@ -66,10 +66,9 @@ const SingleArticle = () => {
             <div className="mt-4">
               <Link className="text-red-600 font-bold" to={"/"}><p>Back to home</p></Link>
               </div>
-              <section className=" border border-red-600 m-auto text-center mt-10 text-red-600 font-black text-xl md:text-4xl">
-                <h2>Related articles here</h2>
+              <section>
+                <CommentList article_id={article_id}/>
               </section>
-
           </main>
         </div>
       )}
