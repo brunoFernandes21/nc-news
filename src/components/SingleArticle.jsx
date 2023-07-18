@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchSingleArticle } from "../utils/api";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 const SingleArticle = () => {
   //TODO:
@@ -65,6 +65,9 @@ const SingleArticle = () => {
                 </div>
               </div>
             </section>
+            <div className="mt-4">
+              <Link className="text-red-600 font-bold" to={"/"}><p>Back to home</p></Link>
+              </div>
               <section className=" border border-red-600 m-auto text-center mt-10 text-red-600 font-black text-xl md:text-4xl">
                 <h2>Related articles here</h2>
               </section>
