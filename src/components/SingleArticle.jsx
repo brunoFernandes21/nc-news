@@ -9,7 +9,7 @@ const SingleArticle = () => {
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
   const { article_id } = useParams();
-  const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mm A");
+  const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
 
   useEffect(() => {
     document.title = "Single Article";
