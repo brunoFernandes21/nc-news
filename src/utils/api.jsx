@@ -1,10 +1,17 @@
 import axios from "axios";
 
-const fetchAllArticles = async () => {
-  const response = await axios.get("https://brunofernandes-northcoders-news.onrender.com/api/articles")
-  const responseData = response
-  const articles = responseData.data.articles
+const articlesApi = axios.create({
+  baseURL: "https://brunofernandes-northcoders-news.onrender.com/api"
+})
+
+export const fetchAllArticles = async () => {
+  const response = await articlesApi.get("/articles")
+  const articles = response.data.articles
   return articles
 }
 
-export default fetchAllArticles
+export const fetchSingleArticle = async (article_id) => {
+  const response = await articlesApi.get(`/articles/${article_id}`)
+  const article = response.data.article
+  return article
+}
