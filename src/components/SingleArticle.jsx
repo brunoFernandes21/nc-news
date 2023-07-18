@@ -3,9 +3,7 @@ import { fetchSingleArticle } from "../utils/api";
 import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 const SingleArticle = () => {
-  //TODO:
-  //DISPLAY ARTICLES DATA IN A ENGAGING WAY
-  //USE ANOTHER USEEFFECT TO FETCH ARTICLES OF SAME TOPIC AND DISPLAY ARE CARDS OR CAROUSELL
+
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
@@ -28,13 +26,13 @@ const SingleArticle = () => {
     // const { title, author, body} = article
     <div>
       {loading && (
-        <h2 className="text-center text-red-600 font-black mt-28 text-2xl md:text-4xl">
+        <h2 className="text-center text-red-600 font-black mt-20 text-2xl md:text-4xl">
           Loading Article...
         </h2>
       )}
       {!loading && (
         <div>
-          <div className="w-11/12 m-auto mt-28 text-center ">
+          <div className="w-11/12 m-auto mt-20 text-center ">
             <p>
               <strong>Published </strong> {article_date}
             </p>
