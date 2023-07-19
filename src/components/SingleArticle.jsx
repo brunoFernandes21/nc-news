@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { fetchSingleArticle, incrementVote, decrementVote } from "../utils/api";
+import {
+  fetchSingleArticle,
+  incrementVote,
+  decrementVote,
+  postComment,
+} from "../utils/api";
 import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import CommentList from "./CommentList";
@@ -14,17 +19,19 @@ const SingleArticle = () => {
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
   const [showComments, setShowComments] = useState(false);
+  const [newComment, setNewComment] = useState({});
+  const [showNewComment, setShowNewComment] = useState(false);
   const [error, setError] = useState(false);
+  const [postError, setPostError] = useState(false);
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
   const [formData, setFormData] = useState({
     username: "",
-    content: "",
+    body: "",
   });
 
-  // TODO
   useEffect(() => {
     document.title = "Single Article";
     setLoading(true);
@@ -39,19 +46,30 @@ const SingleArticle = () => {
 
   const handleChange = (event) => {
     setFormData((currentFormData) => {
-      const {name, value} = event.target
+      const { name, value } = event.target;
       return {
         ...currentFormData,
-        [name]: value
-      }
-    })
-    
-  }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(formData)
+        [name]: value,
+      };
+    });
   };
-
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setShowNewComment(true);
+    setNewComment(formData);
+    setPostError(false);
+    setLoading(false);
+    try {
+      await postComment(formData, article_id);
+      setFormData({
+        username: "",
+        body: "",
+      });
+    } catch (error) {
+      setLoading(false);
+      setPostError(true);
+    }
+  };
   const handleLikeDislike = async (param) => {
     if (param === "like") {
       setLike((currentLikeCount) => {
@@ -88,7 +106,10 @@ const SingleArticle = () => {
       }
     }
   };
-
+  const toggleShowComments = () => {
+    setShowComments(!showComments);
+    setShowNewComment(false);
+  };
   return (
     <div className={`mt-5 ${theme}`}>
       <div
@@ -197,8 +218,8 @@ const SingleArticle = () => {
                       <p
                         className={` ${
                           theme === "dark"
-                            ? "text-white text-center p-2 rounded bg-red-600"
-                            : "text-center p-2 rounded bg-white text-red-600"
+                            ? " text-red-500 p-2 rounded bg-white"
+                            : "text-center p-2 rounded bg-red-500 text-white"
                         } font-bold`}
                       >
                         Oops, something has gone wrong. Please try again!
@@ -210,44 +231,108 @@ const SingleArticle = () => {
             </section>
             <section className="mt-10">
               <form
-                className={`border rounded p-4 ${theme === "dark" ? "" : "border-red-500 "} `}
+                className={` border rounded p-4 ${
+                  theme === "dark" ? "" : "border-red-500 "
+                } `}
                 onSubmit={handleSubmit}
               >
-                <div className="md:flex">
-                  <div>
-                    <label htmlFor="username">Name</label>
+                <div>
+                  <p className="font-bold text-center mb-5 text-red-500">
+                    Share your thoughts below!
+                  </p>
+                </div>
+                <div className="md:flex md:justify-space-between md:items-center">
+                  <div className="md:flex">
+                    <div>
+                      <label htmlFor="username" className="font-medium">
+                        Username
+                      </label>
+                    </div>
+                    <div>
+                      <input
+                        className={`block focus:ring-red-500 focus:border-red-500 border-red-500  font-medium border  p-2 rounded-lg w-full ${
+                          theme === "dark" ? "text-black" : ""
+                        }`}
+                        id="username"
+                        type="text"
+                        value={formData.username}
+                        name="username"
+                        onChange={handleChange}
+                        placeholder="Enter your username..."
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      className="border border-red-600 p-2 rounded w-full"
-                      id="username"
-                      type="text"
-                      value={formData.username}
-                      name="username"
-                      onChange={handleChange}
-                      placeholder="Enter your name…"
-                    />
+                  <div className="mt-4 md:flex">
+                    <div>
+                      <label htmlFor="body" className="font-medium">
+                        Content
+                      </label>
+                    </div>
+                    <div>
+                      <textarea
+                        className={`border block font-medium  p-2 rounded-lg w-full ${
+                          theme === "dark"
+                            ? "text-black focus:ring-red-500 focus:border-red-500 border-red-500"
+                            : "focus:ring-red-500 focus:border-red-500 border-red-500"
+                        }`}
+                        id="body"
+                        type="text"
+                        name="body"
+                        value={formData.body}
+                        onChange={handleChange}
+                        placeholder="Enter your comment…"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="mt-4">
-                  <div>
-                    <label htmlFor="content">Content</label>
-                  </div>
-                  <div>
-                    <textarea
-                    className="border border-red-600 p-2 rounded w-full"
-                      id="content"
-                      type="text"
-                      name="content"
-                      value={formData.content}
-                      onChange={handleChange}
-                      placeholder="Enter your comment…"
-                    />
-                  </div>
+
+                <button
+                  className={` hover:bg-red-600 ease-in duration-100 text-white mt-4 w-full font-bold rounded p-2 md:p-4 ${
+                    formData.username === "" ? "bg-gray-300" : "bg-red-500"
+                  }`}
+                  disabled={formData.username === "" || formData.body === ""}
+                >
+                  Post Comment
+                </button>
+                <div>
+                  {postError && (
+                    <p
+                      className={` ${
+                        theme === "dark"
+                          ? "text-red-500 text-center p-2 rounded bg-white"
+                          : " rounded bg-red-500 text-white"
+                      } font-bold mt-4 p-2 text-center`}
+                    >
+                      Oops, something has gone wrong. Please try again!
+                    </p>
+                  )}
                 </div>
-                <button className={`${theme === "dark" ? "" : "bg-red-500 hover:bg-red-600 ease-in duration-100 text-white "} w-full font-bold rounded p-2 md:p-4`}>Post Comment</button>
               </form>
             </section>
+            {showNewComment && (
+              <section className="mt-10">
+                <div
+                  className={`${
+                    theme === "dark"
+                      ? "bg-white text-black hover:shadow-white"
+                      : "bg-red-500 text-white hover:shadow-black"
+                  } p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}
+                >
+                  <div>
+                    <p>{newComment.body}</p>
+                  </div>
+                  <div className="mt-2 flex gap-4">
+                    <p>
+                      Comment by <strong>{newComment.username}</strong>
+                    </p>
+                    <span>.</span>
+                    <p>
+                      <strong>Likes</strong> 0
+                    </p>
+                  </div>
+                </div>
+              </section>
+            )}
             <section>
               <div
                 className={`font-bold text-center mt-5 mb-8 cursor-pointer ${
@@ -258,7 +343,7 @@ const SingleArticle = () => {
               >
                 <div
                   className="flex gap-1 justify-center items-center"
-                  onClick={() => setShowComments(!showComments)}
+                  onClick={toggleShowComments}
                 >
                   <FaComments className="text-4xl" />
                   <p>{showComments ? "Hide Comment" : "Show comments"}</p>
