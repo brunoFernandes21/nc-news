@@ -20,9 +20,9 @@ const SingleArticle = () => {
   const { article_id } = useParams();
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
   const [formData, setFormData] = useState({
-    name: "",
-    content: ""
-  })
+    username: "",
+    content: "",
+  });
 
   // TODO
   useEffect(() => {
@@ -37,14 +37,21 @@ const SingleArticle = () => {
     getSingleArticle();
   }, []);
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  const handleChange = (event) => {
+    setFormData((currentFormData) => {
+      const {name, value} = event.target
+      return {
+        ...currentFormData,
+        [name]: value
+      }
+    })
+    
   }
-  //------------------TODO:
-  //WHEN USER CLICK DISLIKE, SHOULD IT DECREASE VOTES BY 1?
-  //THE DISLIKE BUTTON WILL ALWAYS SHOWS 0 AFTER PAGE REFRESH, IS THIS THE EXPECTED BEHAVIOUR?
-  //
-  //HOW TO MAKE THE REQUEST FAIL WHEN VOTING
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(formData)
+  };
+
   const handleLikeDislike = async (param) => {
     if (param === "like") {
       setLike((currentLikeCount) => {
@@ -184,15 +191,64 @@ const SingleArticle = () => {
                         <AiFillDislike className="text-2xl mr-2" />
                       </button>
                     </div>
-                   
                   </div>
-                   <div>
-                    {error && <p className={` ${theme === "dark" ? "text-white text-center p-2 rounded bg-red-600" : "text-center p-2 rounded bg-white text-red-600"} font-bold`} >Oops, something has gone wrong. Please try again!</p>}
-                    </div>
+                  <div>
+                    {error && (
+                      <p
+                        className={` ${
+                          theme === "dark"
+                            ? "text-white text-center p-2 rounded bg-red-600"
+                            : "text-center p-2 rounded bg-white text-red-600"
+                        } font-bold`}
+                      >
+                        Oops, something has gone wrong. Please try again!
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             </section>
-            <section> 
+            <section className="mt-10">
+              <form
+                className={`border rounded p-4 ${theme === "dark" ? "" : "border-red-500 "} `}
+                onSubmit={handleSubmit}
+              >
+                <div className="md:flex">
+                  <div>
+                    <label htmlFor="username">Name</label>
+                  </div>
+                  <div>
+                    <input
+                      className="border border-red-600 p-2 rounded w-full"
+                      id="username"
+                      type="text"
+                      value={formData.username}
+                      name="username"
+                      onChange={handleChange}
+                      placeholder="Enter your name…"
+                    />
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <div>
+                    <label htmlFor="content">Content</label>
+                  </div>
+                  <div>
+                    <textarea
+                    className="border border-red-600 p-2 rounded w-full"
+                      id="content"
+                      type="text"
+                      name="content"
+                      value={formData.content}
+                      onChange={handleChange}
+                      placeholder="Enter your comment…"
+                    />
+                  </div>
+                </div>
+                <button className={`${theme === "dark" ? "" : "bg-red-500 hover:bg-red-600 ease-in duration-100 text-white "} w-full font-bold rounded p-2 md:p-4`}>Post Comment</button>
+              </form>
+            </section>
+            <section>
               <div
                 className={`font-bold text-center mt-5 mb-8 cursor-pointer ${
                   theme === "dark"
