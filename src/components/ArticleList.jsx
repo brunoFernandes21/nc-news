@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 import { fetchAllArticles } from "../utils/api";
+import { useContext } from 'react';
+import { ThemeContext } from '../contexts/Theme';
 
 const ArticleList = () => {
+  const { theme } = useContext(ThemeContext)
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -17,12 +20,12 @@ const ArticleList = () => {
   }, []);
 
   return (
-    <div>
-      <div className="mt-24 md:mt-32 text-center text-red-600 font-black text-xl md:text-2xl lg:text-4xl">
+    <div className={`${theme} pb-10 mb-0`}>
+      <div className={`mt-20 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
         <h1>Welcome to Northcoders-News</h1>
       </div>
       {loading && (
-        <h2 className="text-center text-red-600 font-black mt-10 text-2xl md:text-4xl">
+        <h2 className={`${theme === "dark" ? "text-white" : "text-red-600"} text-center font-black mt-10 text-2xl md:text-4xl`}>
           Loading Articles...
         </h2>
       )}
