@@ -175,7 +175,6 @@ const SingleArticle = () => {
                       >
                         <AiFillDislike className="text-2xl mr-2" />
                       </button>
-                      <p>{dislike}</p>
                     </div>
                    
                   </div>
