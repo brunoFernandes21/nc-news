@@ -6,10 +6,13 @@ import ArticleList from "./components/ArticleList";
 import { Route, Routes } from "react-router";
 import TopicPage from "./components/TopicPage";
 import SingleArticle from "./components/SingleArticle";
-
+import { useContext } from 'react';
+import { ThemeContext } from './contexts/Theme';
 function App() {
+  const { theme } = useContext(ThemeContext)
+
   return (
-    <div className="app h-screen flex flex-col justify-between">
+    <div className={`app h-screen flex flex-col justify-between ${theme}`}>
       <Navbar />
       <Routes>
         <Route path="/" element={<ArticleList />} />

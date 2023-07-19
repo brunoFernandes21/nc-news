@@ -21,3 +21,21 @@ export const fetchCommentsByArticleId = async (article_id) => {
   const comments = response.data.comments
   return comments
 }
+
+export const incrementVote = async (article_id) => {
+  const patchRequestBody = {
+    inc_votes: 1
+  }
+  const response = await articlesApi.patch(`/articles/${article_id}`, patchRequestBody)
+  const data = response.data.article.votes
+  return data
+}
+
+export const decrementVote = async (article_id) => {
+  const patchRequestBody = {
+    inc_votes: -1
+  }
+  const response = await articlesApi.patch(`/articles/${article_id}`, patchRequestBody)
+  const data = response.data.article.votes
+  return data
+}
