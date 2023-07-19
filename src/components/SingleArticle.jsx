@@ -11,7 +11,10 @@ const SingleArticle = () => {
   const [showComments, setShowComments] = useState(false)
   const { article_id } = useParams();
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
-
+  const [formData, setFormData] = useState({
+    name: "",
+    content: ""
+  })
   useEffect(() => {
     document.title = "Single Article";
     setLoading(true);
@@ -23,7 +26,10 @@ const SingleArticle = () => {
     };
     getSingleArticle();
   }, []);
-  console.log(showComments)
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  }
   return (
     <div className="mt-5">
       {loading && (
@@ -75,6 +81,7 @@ const SingleArticle = () => {
                 <p>Back to home</p>
               </Link>
             </div>
+
             <div className="text-red-600 font-bold text-center mt-5 cursor-pointer"  onClick={() => setShowComments(!showComments)}>
             <p>{showComments ? "Click here to Hide Comment" : "Click here to view comments"}</p>
             </div>
