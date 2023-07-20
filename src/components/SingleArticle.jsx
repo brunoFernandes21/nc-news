@@ -12,9 +12,11 @@ import { FaComments } from "react-icons/fa";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/Theme";
+import { UserContext } from '../contexts/User';
 
 const SingleArticle = () => {
   const { theme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext)
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
@@ -28,10 +30,10 @@ const SingleArticle = () => {
   const { article_id } = useParams();
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
   const [formData, setFormData] = useState({
-    username: "grumpy19",
+    username: user,
     body: "",
   });
-
+  //temp id to comment
   useEffect(() => {
     document.title = "Single Article";
     setLoading(true);
@@ -335,7 +337,7 @@ const SingleArticle = () => {
             )}
             <section>
               <div
-                className={`font-bold text-center mt-5 mb-8 cursor-pointer ${
+                className={`font-bold text-center mt-5 mb-8  ${
                   theme === "dark"
                     ? "text-white ease-in duration-100 hover:text-red-600 "
                     : "text-red-600"
@@ -345,13 +347,13 @@ const SingleArticle = () => {
                   className="flex gap-1 justify-center items-center"
                   onClick={toggleShowComments}
                 >
-                  <FaComments className="text-4xl" />
-                  <p>{showComments ? "Hide Comment" : "Show comments"}</p>
+                  <FaComments className="text-4xl cursor-pointer" />
+                  <p className="cursor-pointer">{showComments ? "Hide Comment" : "Show comments"}</p>
                 </div>
               </div>
               {showComments ? (
                 <section>
-                  <CommentList article_id={article_id} />
+                  <CommentList article_id={article_id}/>
                 </section>
               ) : (
                 ""

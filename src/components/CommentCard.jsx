@@ -1,10 +1,13 @@
 
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/Theme';
-const CommentCard = ({ author, votes, body }) => {
+import { UserContext } from '../contexts/User';
+const CommentCard = ({ author, votes, body, deleteComment }) => {
   const { theme } = useContext(ThemeContext)
+  const { user } = useContext(UserContext)
+
   return (
-    <div className={`${theme === "dark" ? "bg-white text-black hover:shadow-white" : "bg-red-500 text-white hover:shadow-black"} p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}>
+    <div onClick={() => deleteComment(author)} className={`${theme === "dark" ? "bg-white text-black hover:shadow-white" : "bg-red-500 text-white hover:shadow-black"} p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}>
       <div>
         <p>{body}</p>
       </div>

@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { fetchCommentsByArticleId } from "../utils/api";
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/Theme';
+import { UserContext } from '../contexts/User';
 const CommentList = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const { theme } = useContext(ThemeContext)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     setLoading(true);
@@ -18,6 +20,11 @@ const CommentList = ({ article_id }) => {
     };
     getComments();
   }, []);
+
+  const deleteUserComment = async(author) => {
+    console.log(author, "author")
+  }
+  console.log(user, "user")
   return (
     <div>
       {loading && (
@@ -36,13 +43,14 @@ const CommentList = ({ article_id }) => {
             </h3>
           ) : (
             <section className="grid mb-10 gap-4 m-auto mt-10 md:grid-cols-2">
-              {comments.map(({ author, votes, body }) => {
+              {comments.map(({ author, votes, body, comment_id}) => {
                 return (
                   <CommentCard
-                    key={body}
+                    key={comment_id}
                     author={author}
                     votes={votes}
                     body={body}
+                    deleteComment={deleteUserComment}
                   />
                 );
               })}
