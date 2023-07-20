@@ -39,3 +39,10 @@ export const decrementVote = async (article_id) => {
   const data = response.data.article.votes
   return data
 }
+
+export const fetchArticlesByTopic = async (topic) => {
+  const response = await articlesApi.get("/articles", {params: {topic: topic}})
+  const articles = response.data.articles
+  console.log(articles)
+  return articles
+}
