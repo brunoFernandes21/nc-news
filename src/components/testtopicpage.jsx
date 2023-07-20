@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../contexts/Theme";
 import ArticleCard from "./ArticleCard";
 import { fetchAllArticles } from "../utils/api";
+
 const TopicPage = () => {
   const { topic } = useParams();
   const { theme } = useContext(ThemeContext);
@@ -24,7 +25,7 @@ const TopicPage = () => {
     const getAllArticles = async () => {
       try {
         setError(false);
-        const articles = await fetchAllArticles();
+        // const articles = await fetchAllArticles(topic);
         setArticles(articles);
         setLoading(false);
       } catch (error) {

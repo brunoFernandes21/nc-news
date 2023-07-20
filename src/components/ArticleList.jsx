@@ -3,20 +3,33 @@ import ArticleCard from "./ArticleCard";
 import { fetchAllArticles } from "../utils/api";
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/Theme';
+import { useParams, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ArticleList = () => {
   const { theme } = useContext(ThemeContext)
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { search } = useLocation()
+  const topic = new URLSearchParams(search).get("topic")
+  console.log(topic)
 
   useEffect(() => {
-    document.title = "Home";
+  if (topic === "coding") {
+      document.title = "Coding";
+    } else if (topic === "cooking") {
+      document.title = "Cooking";
+    } else if(topic === "football") {
+      document.title = "Football";
+    } else if(topic === null) {
+      document.title = "Home"
+    }
     setLoading(true);
     setError(false);
     const getAllArticles = async () => {
       try {
-        const articles = await fetchAllArticles();
+        const articles = await fetchAllArticles(topic);
         setError(false);
         setArticles(articles);
         setLoading(false);
@@ -26,7 +39,7 @@ const ArticleList = () => {
       }
     };
     getAllArticles();
-  }, []);
+  }, [topic]);
 
   return (
     <div className={`${theme} pb-10 mb-0`}>

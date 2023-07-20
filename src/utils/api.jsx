@@ -4,9 +4,10 @@ const articlesApi = axios.create({
   baseURL: "https://brunofernandes-northcoders-news.onrender.com/api"
 })
 
-export const fetchAllArticles = async () => {
-  const response = await articlesApi.get("/articles")
+export const fetchAllArticles = async (topic) => {
+  const response = await articlesApi.get("/articles", {params: {topic: topic}})
   const articles = response.data.articles
+  // console.log(articles)
   return articles
 }
 
@@ -40,9 +41,6 @@ export const decrementVote = async (article_id) => {
   return data
 }
 
-export const fetchArticlesByTopic = async (topic) => {
-  const response = await articlesApi.get("/articles", {params: {topic: topic}})
-  const articles = response.data.articles
-  console.log(articles)
-  return articles
+export const postComment = async (newComment, article_id) => {
+  await articlesApi.post(`/articles/${article_id}/comments`, newComment)
 }
