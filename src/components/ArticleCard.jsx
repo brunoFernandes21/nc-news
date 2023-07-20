@@ -16,7 +16,7 @@ const ArticleCard = ({
     navigate(`/articles/${article_id}`);
   };
   return (
-    <div
+    <article
       className={`${theme === "dark" ? "bg-white text-black shadow-md hover:shadow-white" : "text-white bg-red-500 shadow-md hover:shadow-black"} rounded-lg cursor-pointer ease-in duration-300 hover:scale-105`}
       onClick={navigateTo}
     >
@@ -42,7 +42,7 @@ const ArticleCard = ({
           </p>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

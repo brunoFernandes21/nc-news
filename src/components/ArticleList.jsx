@@ -8,13 +8,22 @@ const ArticleList = () => {
   const { theme } = useContext(ThemeContext)
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     document.title = "Home";
     setLoading(true);
+    setError(false);
     const getAllArticles = async () => {
-      const articles = await fetchAllArticles();
-      setArticles(articles);
-      setLoading(false);
+      try {
+        const articles = await fetchAllArticles();
+        setError(false);
+        setArticles(articles);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(true);
+      }
     };
     getAllArticles();
   }, []);
@@ -29,6 +38,20 @@ const ArticleList = () => {
           Loading Articles...
         </h2>
       )}
+            <div>
+        {error && (
+          <p
+            className={` ${
+              theme === "dark"
+                ? "text-red-600 text-center rounded bg-white"
+                : "text-center rounded text-white bg-red-500 border-4 border-red-700"
+            } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
+          >
+            Oops, something has gone wrong. 
+            Please try again!
+          </p>
+        )}
+      </div>
       {!loading && (
         <main className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(

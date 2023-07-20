@@ -18,7 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ArticleList />} />
         <Route path="/articles/:article_id" element={<SingleArticle />} />
-        <Route path="/article/:topic" element={<TopicPage/>} />
+        <Route path="/topic/:topic" element={<TopicPage/>} />
         <Route path="*" element={<NotFound/>}/>
       </Routes>
       <Footer />

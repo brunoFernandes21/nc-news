@@ -245,7 +245,7 @@ const SingleArticle = () => {
                     />
                   </div>
                 </div>
-                <button className={`${theme === "dark" ? "" : "bg-red-500 hover:bg-red-600 ease-in duration-100 text-white "} w-full font-bold rounded p-2 md:p-4`}>Post Comment</button>
+                <button className={`${theme === "dark" ? "" : "bg-red-500 hover:bg-red-600 ease-in duration-100 text-white "} w-full font-bold rounded p-2 mt-4 md:p-4`}>Post Comment</button>
               </form>
             </section>
             <section>
