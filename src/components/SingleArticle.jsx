@@ -90,7 +90,7 @@ const SingleArticle = () => {
   };
 
   return (
-    <div className={`mt-5 ${theme}`}>
+    <div className={`mt-14 ${theme}`}>
       <div
         className={`mt-14 md:mt-20 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
           theme === "dark" ? "border-white" : "border-black"

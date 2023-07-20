@@ -21,7 +21,7 @@ const ArticleList = () => {
 
   return (
     <div className={`${theme} pb-10 mb-0`}>
-      <div className={`mt-20 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
+      <div className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
         <h1>Welcome to Northcoders-News</h1>
       </div>
       {loading && (
