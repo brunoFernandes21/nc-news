@@ -28,7 +28,7 @@ const SingleArticle = () => {
   const { article_id } = useParams();
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
   const [formData, setFormData] = useState({
-    username: "",
+    username: "grumpy19",
     body: "",
   });
 
