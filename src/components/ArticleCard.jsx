@@ -16,23 +16,23 @@ const ArticleCard = ({
     navigate(`/articles/${article_id}`);
   };
   return (
-    <article
+    <main
       className={`${theme === "dark" ? "bg-white text-black shadow-md hover:shadow-white" : "text-white bg-red-500 shadow-md hover:shadow-black"} rounded-lg cursor-pointer ease-in duration-300 hover:scale-105`}
       onClick={navigateTo}
     >
       <img
         className="rounded-t-lg"
         src={article_img_url}
-        alt="Image related to the article"
+        alt={title}
       />
-      <div className="article__info m-4">
+      <section className="article__info m-4">
         <p>
           <strong>Title</strong>: {title}
         </p>
         <p>
           Article written by <strong>{author}</strong>
         </p>
-        <div className="flex gap-4">
+        <section className="flex gap-4">
           <p>
             <strong>Topic:</strong> {topic}
           </p>
@@ -40,9 +40,9 @@ const ArticleCard = ({
           <p>
             <strong>votes:</strong> {votes}
           </p>
-        </div>
-      </div>
-    </article>
+        </section>
+      </section>
+    </main>
   );
 };
 

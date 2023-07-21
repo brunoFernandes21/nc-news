@@ -1,28 +1,28 @@
 import { useState, useEffect } from "react";
 import ArticleCard from "./ArticleCard";
 import { fetchAllArticles } from "../utils/api";
-import { useContext } from 'react';
-import { ThemeContext } from '../contexts/Theme';
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/Theme";
 import { useParams, useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 const ArticleList = () => {
-  const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { search } = useLocation()
-  const topic = new URLSearchParams(search).get("topic")
+  const { search } = useLocation();
+  const topic = new URLSearchParams(search).get("topic");
 
   useEffect(() => {
-  if (topic === "coding") {
+    if (topic === "coding") {
       document.title = "Coding";
     } else if (topic === "cooking") {
       document.title = "Cooking";
-    } else if(topic === "football") {
+    } else if (topic === "football") {
       document.title = "Football";
-    } else if(topic === null) {
-      document.title = "Home"
+    } else if (topic === null) {
+      document.title = "Home";
     }
     setLoading(true);
     setError(false);
@@ -41,16 +41,24 @@ const ArticleList = () => {
   }, [topic]);
 
   return (
-    <div className={`${theme} pb-10 mb-0`}>
-      <div className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
+    <main className={`${theme} pb-10 mb-0`}>
+      <header
+        className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${
+          theme === "dark" ? "text-white" : "text-red-600"
+        }`}
+      >
         <h1>Welcome to Northcoders-News</h1>
-      </div>
+      </header>
       {loading && (
-        <h2 className={`${theme === "dark" ? "text-white" : "text-red-600"} text-center font-black mt-10 text-2xl md:text-4xl`}>
+        <h2
+          className={`${
+            theme === "dark" ? "text-white" : "text-red-600"
+          } text-center font-black mt-10 text-2xl md:text-4xl`}
+        >
           Loading Articles...
         </h2>
       )}
-            <div>
+      <section>
         {error && (
           <p
             className={` ${
@@ -59,13 +67,12 @@ const ArticleList = () => {
                 : "text-center rounded text-white bg-red-500 border-4 border-red-700"
             } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
           >
-            Oops, something has gone wrong. 
-            Please try again!
+            Oops, something has gone wrong. Please try again!
           </p>
         )}
-      </div>
+      </section>
       {!loading && (
-        <main className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
+        <section className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
             ({ title, author, topic, votes, article_id, article_img_url }) => {
               return (
@@ -81,9 +88,9 @@ const ArticleList = () => {
               );
             }
           )}
-        </main>
+        </section>
       )}
-    </div>
+    </main>
   );
 };
 

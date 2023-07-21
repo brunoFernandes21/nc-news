@@ -29,9 +29,9 @@ const Navbar = () => {
           <ToggleTheme />
         </ul>
       </ul>
-      <div className="p-1 text-center bg-white text-red-600 md:p-2 rounded">
+      <p className="p-1 text-center bg-white text-red-600 md:p-2 rounded">
         <p>Hello {user}</p>
-      </div>
+      </p>
     </nav>
   );
 };

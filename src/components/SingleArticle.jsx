@@ -131,8 +131,8 @@ const SingleArticle = () => {
     } 
   }
   return (
-    <div className={`mt-14 ${theme}`}>
-      <div
+    <main className={`mt-14 ${theme}`}>
+      <section
         className={`mt-14 md:mt-20 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
           theme === "dark" ? "border-white" : "border-black"
         }`}
@@ -140,7 +140,7 @@ const SingleArticle = () => {
         <Link className=" font-bold" to={"/"}>
           <p>Back to home</p>
         </Link>
-      </div>
+      </section>
       {loading && (
         <h2
           className={`text-center  font-black mt-20 text-2xl md:text-4xl ${
@@ -151,7 +151,7 @@ const SingleArticle = () => {
         </h2>
       )}
       {!loading && (
-        <div>
+        <section>
           <header
             className={`w-11/12 m-auto mt-5 text-center font-black text-xl md:text-2xl lg:text-4xl ${
               theme === "dark" ? "text-white" : "text-red-600"
@@ -159,18 +159,18 @@ const SingleArticle = () => {
           >
             <h1>{pageTitle}</h1>
           </header>
-          <div className="w-11/12 m-auto mt-5 md:w-11/12 lg:w-3/5">
+          <section className="w-11/12 m-auto mt-5 md:w-11/12 lg:w-3/5">
             <p>
               <strong>Published </strong>
               {article_date}
             </p>
-          </div>
-          <div className="w-11/12 m-auto md:w-11/12 lg:w-3/5">
+          </section>
+          <section className="w-11/12 m-auto md:w-11/12 lg:w-3/5">
             <p>
               By <strong>{article.author}</strong>
             </p>
-          </div>
-          <main className="w-11/12 mt-2 m-auto md:w-11/12 lg:w-3/5 ">
+          </section>
+          <section className="w-11/12 mt-2 m-auto md:w-11/12 lg:w-3/5 ">
             <section
               className={`grid ease-in duration-300 rounded-t-lg md:rounded-none md:grid-cols-2 ${
                 theme === "dark"
@@ -181,24 +181,21 @@ const SingleArticle = () => {
               <img
                 className="rounded-t-lg md:rounded-none md:h-full"
                 src={article.article_img_url}
-                alt="Image related to the article"
+                alt={pageTitle}
               />
-              <div className="p-4">
-                <div>
+              <section className="p-4">
                   <p>{article.body}</p>
-                </div>
-
-                <div className="flex justify-center flex-wrap gap-4 items-center pt-4">
-                  <div className="flex gap-4 items-center">
+                <section className="flex justify-center flex-wrap gap-4 items-center pt-4">
+                  <section className="flex gap-4 items-center">
                     <p>
                       <strong>Topic:</strong> {article.topic}
                     </p>
                     <p>
                       <strong>Comments:</strong> {article.comment_count}
                     </p>
-                  </div>
-                  <div className="flex gap-4">
-                    <div className=" flex ">
+                  </section>
+                  <section className="flex gap-4">
+                    <section className=" flex ">
                       <button
                         className={
                           like > 0
@@ -214,9 +211,9 @@ const SingleArticle = () => {
                         <AiFillLike className="text-2xl mr-2" />
                       </button>
                       <p>{article.votes + like}</p>
-                    </div>
+                    </section>
 
-                    <div className="flex">
+                    <section className="flex">
                       <button
                         className={
                           dislike > 0
@@ -231,9 +228,9 @@ const SingleArticle = () => {
                       >
                         <AiFillDislike className="text-2xl mr-2" />
                       </button>
-                    </div>
-                  </div>
-                  <div>
+                    </section>
+                  </section>
+                  <section>
                     {error && (
                       <p
                         className={` ${
@@ -245,9 +242,9 @@ const SingleArticle = () => {
                         Oops, something has gone wrong. Please try again!
                       </p>
                     )}
-                  </div>
-                </div>
-              </div>
+                  </section>
+                </section>
+              </section>
             </section>
             <section className="mt-10">
               <form
@@ -256,19 +253,17 @@ const SingleArticle = () => {
                 } `}
                 onSubmit={handleSubmit}
               >
-                <div>
+                <section>
                   <p className={`font-bold text-center mb-5 text-red-500 md:text-xl ${theme === "dark" ? "text-white" : ""}`}>
                     Share your thoughts below!
                   </p>
-                </div>
-                <div className="md:flex md:justify-space-between md:items-center">
-                  <div className="md:flex">
-                    <div>
+                </section>
+                <section className="md:flex md:justify-space-between md:items-center">
+                  <section className="md:flex">
                       <label htmlFor="username" className="font-medium">
                         Username
                       </label>
-                    </div>
-                    <div>
+                    <section>
                       <input
                         className={`block focus:ring-red-500 focus:border-red-500 border-red-500  font-medium border  p-2 rounded-lg w-full ${
                           theme === "dark" ? "text-black" : ""
@@ -280,15 +275,12 @@ const SingleArticle = () => {
                         onChange={handleChange}
                         placeholder="Enter your username..."
                       />
-                    </div>
-                  </div>
-                  <div className="mt-4 md:flex">
-                    <div>
+                    </section>
+                  </section>
+                  <section className="mt-4 md:flex">
                       <label htmlFor="body" className="font-medium">
                         Content
                       </label>
-                    </div>
-                    <div>
                       <textarea
                         className={`border block font-medium  p-2 rounded-lg w-full ${
                           theme === "dark"
@@ -302,9 +294,8 @@ const SingleArticle = () => {
                         onChange={handleChange}
                         placeholder="Enter your comment…"
                       />
-                    </div>
-                  </div>
-                </div>
+                  </section>
+                </section>
 
                 <button
                   className={` hover:bg-red-600 ease-in duration-100 text-white mt-4 w-full font-bold rounded p-2 md:p-4 ${
@@ -367,21 +358,21 @@ const SingleArticle = () => {
               )}
 
             <section>
-              <div
+              <section
                 className={`font-bold text-center mt-5 mb-8  ${
                   theme === "dark"
                     ? "text-white ease-in duration-100 hover:text-red-600 "
                     : "text-red-600"
                 }`}
               >
-                <div
+                <section
                   className="flex gap-1 justify-center items-center"
                   onClick={toggleShowComments}
                 >
                   <FaComments className="text-4xl cursor-pointer" />
                   <p className="cursor-pointer">{showComments ? "Hide Comment" : "Show comments"}</p>
-                </div>
-              </div>
+                </section>
+              </section>
               
               {showComments ? (
                 <section>
@@ -391,10 +382,10 @@ const SingleArticle = () => {
                 ""
               )}
             </section>
-          </main>
-        </div>
+          </section>
+        </section>
       )}
-    </div>
+    </main>
   );
 };
 
