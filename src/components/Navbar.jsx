@@ -10,17 +10,10 @@ const Navbar = () => {
   const { user } = useContext(UserContext);
   return (
     <nav
-      className={`${
-        theme === "dark" ? "bg-red-600 shadow-white" : "shadow-black bg-red-600"
-      } shadow-md top-0 fixed z-50 w-full flex justify-between items-center text-white font-black p-5 h-14 md:h-20 md:px-24`}
+      className={`${theme === "dark" ? "bg-red-600 shadow-white" : "shadow-black bg-red-600"} shadow-md top-0 fixed z-50 w-full flex justify-between items-center flex-wrap text-white font-black p-2 px-4 md:p-4 md:px-10 lg:p-6 lg:px-20 `}
     >
-      <Link
-        className="text-2xl md:text-3xl ease-in-out duration-300 hover:text-gray-300"
-        to={"/"}
-      >
-        NC NEWS
-      </Link>
-      <ul className="flex justify-center items-center gap-2 md:gap-4 ">
+      <Link className='text-2xl md:text-3xl ease-in-out duration-300 hover:text-gray-300' to={"/"}>NC NEWS</Link>
+      <ul className="flex md:text-xl md:gap-4 justify-center items-center md:m-auto">
         {topics.map((topic) => {
           return (
             <Link

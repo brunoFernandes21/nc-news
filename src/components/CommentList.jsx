@@ -33,7 +33,7 @@ const CommentList = ({ article_id }) => {
       await deleteComment(comment_id)
       setTimeout(() => {
         setSuccess(false)
-      }, 3000);
+      }, 1000);
     } catch (error) {
       setError(true)
       setSuccess(false)
@@ -43,7 +43,7 @@ const CommentList = ({ article_id }) => {
       setComments(unfilteredComments);
       setTimeout(() => {
         setError(false)
-      }, 3000);
+      }, 1000);
     } 
   };
 
@@ -70,7 +70,7 @@ const CommentList = ({ article_id }) => {
             <h2>Comments</h2>
           </section>
           {error && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
-          {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-500 text-green-500"}`}>Comment deleted successfully!</p>}
+          {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
           {comments.length === 0 ? (
             <h3
               className={`${
