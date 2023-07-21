@@ -1,9 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { useContext } from 'react';
-import { ThemeContext } from '../contexts/Theme';
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/Theme";
 const NotFound = () => {
-    const { theme } = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
 
   return (
     <div className={`p-10 mt-60 font-bold block text-center m-auto ${theme === "dark" ? "text-white" : "text-red-500"}`}>
@@ -14,4 +13,4 @@ const NotFound = () => {
   )
 }
 
-export default NotFound
+export default NotFound;
