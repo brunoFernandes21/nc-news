@@ -22,6 +22,7 @@ const SingleArticle = () => {
   const [newComment, setNewComment] = useState({});
   const [showNewComment, setShowNewComment] = useState(false);
   const [error, setError] = useState(false);
+  const [noArticleError, setNoArticleError] = useState(false)
   const [postError, setPostError] = useState(false);
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
@@ -35,11 +36,19 @@ const SingleArticle = () => {
   useEffect(() => {
     document.title = "Single Article";
     setLoading(true);
+    setNoArticleError(false)
     const getSingleArticle = async () => {
-      const data = await fetchSingleArticle(article_id);
-      setArticle(data);
-      setPageTitle(data.title);
-      setLoading(false);
+      try {
+        const data = await fetchSingleArticle(article_id);
+        setNoArticleError(false)
+        setArticle(data);
+        setPageTitle(data.title);
+        setLoading(false);
+      } catch (error) {
+        console.log("Article Not Found")
+        setNoArticleError(true)
+        setLoading(false);
+      }
     };
     getSingleArticle();
   }, []);
@@ -111,9 +120,9 @@ const SingleArticle = () => {
     setShowNewComment(false);
   };
   return (
-    <div className={`mt-5 ${theme}`}>
-      <div
-        className={`mt-14 md:mt-20 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
+    <main className={`mt-5 ${theme}`}>
+        <div
+        className={`mt-24 md:mt-26 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
           theme === "dark" ? "border-white" : "border-black"
         }`}
       >
@@ -130,7 +139,15 @@ const SingleArticle = () => {
           Loading Article...
         </h2>
       )}
-      {!loading && (
+      {noArticleError && (
+        <div className={`p-10 font-bold block text-center m-auto ${theme === "dark" ? "text-white" : "text-red-500"}`}>
+        <h1 className='text-8xl'>404</h1>
+        <h2 className='text-4xl'>Article Not Found</h2>
+        </div>
+      )}
+      {!noArticleError && (
+        <section>
+          {!loading && (
         <div>
           <header
             className={`w-11/12 m-auto mt-5 text-center font-black text-xl md:text-2xl lg:text-4xl ${
@@ -177,8 +194,8 @@ const SingleArticle = () => {
                       <strong>Comments:</strong> {article.comment_count}
                     </p>
                   </div>
-                  <div className="flex gap-4">
-                    <div className=" flex ">
+                  <section className="flex gap-4">
+                    <section className=" flex ">
                       <button
                         className={
                           like > 0
@@ -194,9 +211,9 @@ const SingleArticle = () => {
                         <AiFillLike className="text-2xl mr-2" />
                       </button>
                       <p>{article.votes + like}</p>
-                    </div>
+                    </section>
 
-                    <div className="flex">
+                    <section className="flex">
                       <button
                         className={
                           dislike > 0
@@ -211,8 +228,8 @@ const SingleArticle = () => {
                       >
                         <AiFillDislike className="text-2xl mr-2" />
                       </button>
-                    </div>
-                  </div>
+                    </section>
+                  </section>
                   <div>
                     {error && (
                       <p
@@ -360,7 +377,12 @@ const SingleArticle = () => {
           </main>
         </div>
       )}
-    </div>
+        </section>
+      )}
+
+     
+      
+    </main>
   );
 };
 
