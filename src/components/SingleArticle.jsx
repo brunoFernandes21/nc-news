@@ -178,7 +178,7 @@ const SingleArticle = () => {
                   : "bg-red-500 text-white"
               }`}
             >
-              <section className="m-auto md:border-8  md:border-white">
+              <section className="m-auto md:border-8 md:border-white">
               <img
                 className="rounded-t-lg md:rounded-none"
                 src={article.article_img_url}
