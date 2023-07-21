@@ -20,7 +20,7 @@ const SingleArticle = () => {
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(true);
   const [newComment, setNewComment] = useState({});
   const [showNewComment, setShowNewComment] = useState(false);
   const [error, setError] = useState(false);
@@ -64,7 +64,7 @@ const SingleArticle = () => {
     try {
       await postComment(formData, article_id);
       setFormData({
-        username: "",
+        username: user,
         body: "",
       });
     } catch (error) {
@@ -311,7 +311,24 @@ const SingleArticle = () => {
                 </div>
               </form>
             </section>
-            {showNewComment && (
+            
+            <section>
+              <div
+                className={`font-bold text-center mt-5 mb-8  ${
+                  theme === "dark"
+                    ? "text-white ease-in duration-100 hover:text-red-600 "
+                    : "text-red-600"
+                }`}
+              >
+                <div
+                  className="flex gap-1 justify-center items-center"
+                  onClick={toggleShowComments}
+                >
+                  <FaComments className="text-4xl cursor-pointer" />
+                  <p className="cursor-pointer">{showComments ? "Hide Comment" : "Show comments"}</p>
+                </div>
+              </div>
+              {showNewComment && (
               <section className="mt-10">
                 <div
                   className={`${
@@ -335,22 +352,6 @@ const SingleArticle = () => {
                 </div>
               </section>
             )}
-            <section>
-              <div
-                className={`font-bold text-center mt-5 mb-8  ${
-                  theme === "dark"
-                    ? "text-white ease-in duration-100 hover:text-red-600 "
-                    : "text-red-600"
-                }`}
-              >
-                <div
-                  className="flex gap-1 justify-center items-center"
-                  onClick={toggleShowComments}
-                >
-                  <FaComments className="text-4xl cursor-pointer" />
-                  <p className="cursor-pointer">{showComments ? "Hide Comment" : "Show comments"}</p>
-                </div>
-              </div>
               {showComments ? (
                 <section>
                   <CommentList article_id={article_id}/>
