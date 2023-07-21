@@ -30,7 +30,7 @@ const SingleArticle = () => {
   const [apiError, setApiError] = useState(null);
   const [noArticleError, setNoArticleError] = useState(null);
   const [postError, setPostError] = useState(null);
-  const [deleteError, setDeleteError] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
@@ -128,13 +128,13 @@ const SingleArticle = () => {
   };
   const handleDelete = async () => {
     setShowNewComment(false);
-    setDeleteError(false);
+    setDeleteError(null);
     setLoading(false);
     try {
       await deleteComment(newComment_id);
     } catch (error) {
       setLoading(false);
-      setDeleteError(true);
+      setDeleteError(error);
       setShowNewComment(true);
     }
   };
@@ -337,28 +337,29 @@ const SingleArticle = () => {
                 </form>
               </section>
               {!postError && showNewComment && (
-                <section className="mt-10">
-                  <section
-                    className={`${
-                      theme === "dark"
-                        ? "bg-white text-black hover:shadow-white"
-                        : "bg-red-500 text-white hover:shadow-black"
-                    } p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}
-                  >
-                    <div>
-                      <p>{newComment.body}</p>
-                    </div>
-                    <div className="mt-2 flex gap-4">
-                      <p>
-                        Comment by <strong>{newComment.username}</strong>
-                      </p>
-                      <span>.</span>
-                      <p>
-                        <strong>Likes</strong> 0
-                      </p>
-                    </div>
-                  </section>
+                <section
+                className={`${
+                  theme === "dark"
+                    ? "bg-white text-black hover:shadow-white"
+                    : "bg-red-500 text-white hover:shadow-black"
+                } p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
+              >
+                <p className="w-11/12">{newComment.body}</p>
+                {user === newComment.username && (
+                  <span>
+                  <FaTrashAlt onClick={handleDelete} className={`ease-in duration-300 hover:scale-150 text-xl absolute right-0 top-0 mr-4 mt-4 cursor-pointer ${theme === "dark" ? "text-red-600 hover:" : ""}`}/>
+                  </span>
+                )}
+                <section className="mt-2 flex gap-4">
+                  <p>
+                    Comment by <strong>{newComment.username}</strong>
+                  </p>
+                  <span>.</span>
+                  <p>
+                    <strong>Likes</strong> 0
+                  </p>
                 </section>
+              </section>
               )}
               {deleteError && (
                 <p
@@ -371,7 +372,7 @@ const SingleArticle = () => {
                 Oops, something has gone wrong. Please try again!
               </p>
               )}
-              {showNewComment && (
+              {/* {showNewComment && (
                   <section
                   className={`${
                     theme === "dark"
@@ -395,7 +396,7 @@ const SingleArticle = () => {
                     </p>
                   </section>
                 </section>
-                )}
+                )} */}
       
               <section>
                 <section

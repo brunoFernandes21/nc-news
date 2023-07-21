@@ -59,20 +59,6 @@ const ArticleList = () => {
           Loading Articles...
         </h2>
       )}
-      
-      <section>
-        {apiError && (
-          <p
-            className={` ${
-              theme === "dark"
-                ? "text-red-600 text-center rounded bg-white"
-                : "text-center rounded text-white bg-red-500 border-4 border-red-700"
-            } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
-          >
-            Oops, something has gone wrong. Please try again!
-          </p>
-        )}
-      </section>
       {!loading && (
         <section className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
