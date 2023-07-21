@@ -7,7 +7,6 @@ const articlesApi = axios.create({
 export const fetchAllArticles = async (topic) => {
   const response = await articlesApi.get("/articles", {params: {topic: topic}})
   const articles = response.data.articles
-  // console.log(articles)
   return articles
 }
 

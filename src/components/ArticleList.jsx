@@ -13,7 +13,6 @@ const ArticleList = () => {
   const [error, setError] = useState(false);
   const { search } = useLocation()
   const topic = new URLSearchParams(search).get("topic")
-  console.log(topic)
 
   useEffect(() => {
   if (topic === "coding") {

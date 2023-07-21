@@ -49,7 +49,6 @@ const SingleArticle = () => {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData)
   };
 
   const handleLikeDislike = async (param) => {
