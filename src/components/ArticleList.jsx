@@ -10,7 +10,7 @@ const ArticleList = () => {
   const { theme } = useContext(ThemeContext)
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [apiError, setApiError] = useState(null);
   const { search } = useLocation()
   const topic = new URLSearchParams(search).get("topic")
 
@@ -25,16 +25,16 @@ const ArticleList = () => {
       document.title = "Home"
     }
     setLoading(true);
-    setError(false);
+    setApiError(false);
     const getAllArticles = async () => {
       try {
         const articles = await fetchAllArticles(topic);
-        setError(false);
+        setApiError(false);
         setArticles(articles);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setError(true);
+        setApiError(error);
       }
     };
     getAllArticles();
@@ -51,7 +51,7 @@ const ArticleList = () => {
         </h2>
       )}
             <div>
-        {error && (
+        {apiError && (
           <p
             className={` ${
               theme === "dark"
@@ -59,8 +59,9 @@ const ArticleList = () => {
                 : "text-center rounded text-white bg-red-500 border-4 border-red-700"
             } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
           >
-            Oops, something has gone wrong. 
-            Please try again!
+            {apiError.response.status} 
+            <br />
+            {apiError.response.data.msg}
           </p>
         )}
       </div>

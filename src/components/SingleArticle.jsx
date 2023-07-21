@@ -21,9 +21,9 @@ const SingleArticle = () => {
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState({});
   const [showNewComment, setShowNewComment] = useState(false);
-  const [error, setError] = useState(false);
-  const [noArticleError, setNoArticleError] = useState(false)
-  const [postError, setPostError] = useState(false);
+  const [apiError, setApiError] = useState(null);
+  const [noArticleError, setNoArticleError] = useState(null)
+  const [postError, setPostError] = useState(null);
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
@@ -36,17 +36,16 @@ const SingleArticle = () => {
   useEffect(() => {
     document.title = "Single Article";
     setLoading(true);
-    setNoArticleError(false)
+    setNoArticleError(null)
     const getSingleArticle = async () => {
       try {
         const data = await fetchSingleArticle(article_id);
-        setNoArticleError(false)
+        setNoArticleError(null)
         setArticle(data);
         setPageTitle(data.title);
         setLoading(false);
       } catch (error) {
-        console.log("Article Not Found")
-        setNoArticleError(true)
+        setNoArticleError(error)
         setLoading(false);
       }
     };
@@ -66,7 +65,7 @@ const SingleArticle = () => {
     event.preventDefault();
     setShowNewComment(true);
     setNewComment(formData);
-    setPostError(false);
+    setPostError(null);
     setLoading(false);
     try {
       await postComment(formData, article_id);
@@ -76,7 +75,7 @@ const SingleArticle = () => {
       });
     } catch (error) {
       setLoading(false);
-      setPostError(true);
+      setPostError(error);
     }
   };
   const handleLikeDislike = async (param) => {
@@ -85,14 +84,13 @@ const SingleArticle = () => {
         return currentLikeCount + 1;
       });
       try {
-        setError(false);
+        setApiError(null);
         await incrementVote(article_id);
       } catch (error) {
         setLike((currentlikeCount) => {
           return currentlikeCount - 1;
         });
-        setError(true);
-        console.log(error);
+        setApiError(error);
       }
     } else {
       setDislike((currentDislikeCount) => {
@@ -102,7 +100,7 @@ const SingleArticle = () => {
         return currentlikeCount - 1;
       });
       try {
-        setError(false);
+        setApiError(false);
         await decrementVote(article_id);
       } catch (error) {
         setDislike((currentDeslikeCount) => {
@@ -111,7 +109,7 @@ const SingleArticle = () => {
         setLike((currentlikeCount) => {
           return currentlikeCount + 1;
         });
-        setError(true);
+        setApiError(error);
       }
     }
   };
@@ -141,8 +139,8 @@ const SingleArticle = () => {
       )}
       {noArticleError && (
         <div className={`p-10 font-bold block text-center m-auto ${theme === "dark" ? "text-white" : "text-red-500"}`}>
-        <h1 className='text-8xl'>404</h1>
-        <h2 className='text-4xl'>Article Not Found</h2>
+        <h1 className='text-8xl'>{noArticleError.response.status}</h1>
+        <h2 className='text-4xl'>{noArticleError.response.data.msg}</h2>
         </div>
       )}
       {!noArticleError && (
@@ -231,7 +229,7 @@ const SingleArticle = () => {
                     </section>
                   </section>
                   <div>
-                    {error && (
+                    {apiError && (
                       <p
                         className={` ${
                           theme === "dark"
@@ -239,7 +237,7 @@ const SingleArticle = () => {
                             : "text-center p-2 rounded bg-red-500 text-white"
                         } font-bold`}
                       >
-                        Oops, something has gone wrong. Please try again!
+                        Something has gone wrong
                       </p>
                     )}
                   </div>
@@ -320,13 +318,13 @@ const SingleArticle = () => {
                           : " rounded bg-red-500 text-white"
                       } font-bold mt-4 p-2 text-center`}
                     >
-                      Oops, something has gone wrong. Please try again!
+                      <p>Unable to post comment. Please, try again later!</p>
                     </p>
                   )}
                 </div>
               </form>
             </section>
-            {showNewComment && (
+            {!postError && showNewComment && (
               <section className="mt-10">
                 <div
                   className={`${
