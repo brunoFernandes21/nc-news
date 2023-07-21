@@ -34,21 +34,21 @@ const CommentList = ({ article_id }) => {
     });
     setComments(filteredComments);
     try {
-      setError(false)
+      setApiError(false)
       setSuccess(true) 
       await deleteComment(comment_id)
       setTimeout(() => {
         setSuccess(false)
       }, 1000);
     } catch (error) {
-      setError(true)
+      setApiError(true)
       setSuccess(false)
       const unfilteredComments = comments.filter((comment) => {
         return comment
       });
       setComments(unfilteredComments);
       setTimeout(() => {
-        setError(false)
+        setApiError(false)
       }, 1000);
     } 
   };
@@ -88,7 +88,7 @@ const CommentList = ({ article_id }) => {
           >
             <h2>Comments</h2>
           </section>
-          {error && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
+          {apiError && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
           {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
           {comments.length === 0 ? (
             <h3
