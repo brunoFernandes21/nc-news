@@ -41,5 +41,5 @@ export const decrementVote = async (article_id) => {
 }
 
 export const postComment = async (newComment, article_id) => {
-  await articlesApi.post(`/articles/${article_id}/comments`, newComment)
+  await articlesApi.post(`/article/${article_id}/comments`, newComment)
 }
