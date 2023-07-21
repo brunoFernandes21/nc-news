@@ -4,6 +4,7 @@ import {
   incrementVote,
   decrementVote,
   postComment,
+  deleteComment
 } from "../utils/api";
 import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -12,23 +13,29 @@ import { FaComments } from "react-icons/fa";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/Theme";
+import { UserContext } from '../contexts/User';
+import { FaTrashAlt } from "react-icons/fa"
 
 const SingleArticle = () => {
   const { theme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext)
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
   const [pageTitle, setPageTitle] = useState("");
   const [showComments, setShowComments] = useState(false);
   const [newComment, setNewComment] = useState({});
+  const [newComment_id, setNewComment_id] = useState(null)
   const [showNewComment, setShowNewComment] = useState(false);
   const [error, setError] = useState(false);
   const [postError, setPostError] = useState(false);
+  const [deleteError, setDeleteError] = useState(false)
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
+
   const article_date = dayjs(article.created_at).format("DD/MM/YYYY HH:mma");
   const [formData, setFormData] = useState({
-    username: "grumpy19",
+    username: user,
     body: "",
   });
 
@@ -60,9 +67,10 @@ const SingleArticle = () => {
     setPostError(false);
     setLoading(false);
     try {
-      await postComment(formData, article_id);
+      const data = await postComment(formData, article_id);
+      setNewComment_id(data.comment_id)
       setFormData({
-        username: "",
+        username: user,
         body: "",
       });
     } catch (error) {
@@ -110,8 +118,20 @@ const SingleArticle = () => {
     setShowComments(!showComments);
     setShowNewComment(false);
   };
+  const handleDelete = async() => {
+    setShowNewComment(false)
+    setDeleteError(false)
+    setLoading(false)
+    try {
+      await deleteComment(newComment_id)
+    } catch (error) {
+      setLoading(false)
+      setDeleteError(true)
+      setShowNewComment(true)
+    } 
+  }
   return (
-    <div className={`mt-5 ${theme}`}>
+    <div className={`mt-14 ${theme}`}>
       <div
         className={`mt-14 md:mt-20 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
           theme === "dark" ? "border-white" : "border-black"
@@ -294,48 +314,61 @@ const SingleArticle = () => {
                 >
                   Post Comment
                 </button>
-                <div>
+                <section>
                   {postError && (
                     <p
-                      className={` ${
-                        theme === "dark"
-                          ? "text-red-500 text-center p-2 rounded bg-white"
-                          : " rounded bg-red-500 text-white"
-                      } font-bold mt-4 p-2 text-center`}
+                    className={` ${
+                      theme === "dark"
+                        ? "text-red-500 border-2 border-red-700 text-center p-2 rounded bg-white"
+                        : " rounded  bg-red-400 text-white border-2 border-red-700"
+                    } font-bold mt-4 p-2 text-center`}
                     >
                       Oops, something has gone wrong. Please try again!
                     </p>
                   )}
-                </div>
+                </section>
               </form>
             </section>
-            {showNewComment && (
-              <section className="mt-10">
-                <div
-                  className={`${
-                    theme === "dark"
-                      ? "bg-white text-black hover:shadow-white"
-                      : "bg-red-500 text-white hover:shadow-black"
-                  } p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}
-                >
-                  <div>
-                    <p>{newComment.body}</p>
-                  </div>
-                  <div className="mt-2 flex gap-4">
-                    <p>
-                      Comment by <strong>{newComment.username}</strong>
-                    </p>
-                    <span>.</span>
-                    <p>
-                      <strong>Likes</strong> 0
-                    </p>
-                  </div>
-                </div>
-              </section>
+            {deleteError && (
+              <p
+              className={` ${
+                theme === "dark"
+                  ? "text-red-500 border-2 border-red-700 text-center p-2 rounded bg-white"
+                  : " rounded  bg-red-400 text-white border-2 border-red-700"
+              } font-bold mt-4 p-2 text-center`}
+            >
+              Oops, something has gone wrong. Please try again!
+            </p>
             )}
+            {showNewComment && (
+                <section
+                className={`${
+                  theme === "dark"
+                    ? "bg-white text-black hover:shadow-white"
+                    : "bg-red-500 text-white hover:shadow-black"
+                } p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
+              >
+                <p className="w-11/12">{newComment.body}</p>
+                {user === newComment.username && (
+                  <span>
+                  <FaTrashAlt onClick={handleDelete} className={`ease-in duration-300 hover:scale-150 text-xl absolute right-0 top-0 mr-4 mt-4 cursor-pointer ${theme === "dark" ? "text-red-600 hover:" : ""}`}/>
+                  </span>
+                )}
+                <section className="mt-2 flex gap-4">
+                  <p>
+                    Comment by <strong>{newComment.username}</strong>
+                  </p>
+                  <span>.</span>
+                  <p>
+                    <strong>Likes</strong> 0
+                  </p>
+                </section>
+              </section>
+              )}
+
             <section>
               <div
-                className={`font-bold text-center mt-5 mb-8 cursor-pointer ${
+                className={`font-bold text-center mt-5 mb-8  ${
                   theme === "dark"
                     ? "text-white ease-in duration-100 hover:text-red-600 "
                     : "text-red-600"
@@ -345,13 +378,14 @@ const SingleArticle = () => {
                   className="flex gap-1 justify-center items-center"
                   onClick={toggleShowComments}
                 >
-                  <FaComments className="text-4xl" />
-                  <p>{showComments ? "Hide Comment" : "Show comments"}</p>
+                  <FaComments className="text-4xl cursor-pointer" />
+                  <p className="cursor-pointer">{showComments ? "Hide Comment" : "Show comments"}</p>
                 </div>
               </div>
+              
               {showComments ? (
                 <section>
-                  <CommentList article_id={article_id} />
+                  <CommentList article_id={article_id}/>
                 </section>
               ) : (
                 ""

@@ -1,21 +1,37 @@
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/Theme";
+import { FaTrashAlt } from "react-icons/fa"
+import { UserContext } from '../contexts/User';
 
-import { useContext } from 'react';
-import { ThemeContext } from '../contexts/Theme';
-const CommentCard = ({ author, votes, body }) => {
-  const { theme } = useContext(ThemeContext)
+
+const CommentCard = ({ author, votes, body, comment_id, deleteComment }) => {
+  const { theme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext)
+
   return (
-    <div className={`${theme === "dark" ? "bg-white text-black hover:shadow-white" : "bg-red-500 text-white hover:shadow-black"} p-4 shadow-md rounded-lg cursor-pointer ease-in duration-300`}>
-      <div>
-        <p>{body}</p>
-      </div>
-      <div className="mt-2 flex gap-4">
+    <main
+      className={`${
+        theme === "dark"
+          ? "bg-white text-black hover:shadow-white"
+          : "bg-red-500 text-white hover:shadow-black"
+      } p-4  shadow-md rounded-lg ease-in duration-300 relative`}
+    >
+      <p className="w-11/12">{body}</p>
+      {user === author && (
+        <span>
+        <FaTrashAlt onClick={() => deleteComment(comment_id)} className={`ease-in duration-300 hover:scale-150 text-xl absolute right-0 top-0 mr-4 mt-4 cursor-pointer ${theme === "dark" ? "text-red-600 hover:" : ""}`}/>
+        </span>
+      )}
+      <section className="mt-2 flex gap-4">
         <p>
           Comment by <strong>{author}</strong>
         </p>
         <span>.</span>
-        <p><strong>Likes</strong> {votes}</p>
-      </div>
-    </div>
+        <p>
+          <strong>Likes</strong> {votes}
+        </p>
+      </section>
+    </main>
   );
 };
 
