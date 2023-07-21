@@ -172,17 +172,19 @@ const SingleArticle = () => {
           </section>
           <section className="w-11/12 mt-2 m-auto md:w-11/12 lg:w-3/5 ">
             <section
-              className={`grid ease-in duration-300 rounded-t-lg md:rounded-none md:grid-cols-2 ${
+              className={`grid ease-in duration-300 rounded-t-lg md:rounded-none ${
                 theme === "dark"
                   ? "bg-white text-black shadow-md hover:shadow-white"
                   : "bg-red-500 text-white"
               }`}
             >
+              <section className="m-auto md:border-8  md:border-white">
               <img
-                className="rounded-t-lg md:rounded-none md:h-full"
+                className="rounded-t-lg md:rounded-none"
                 src={article.article_img_url}
                 alt={pageTitle}
               />
+              </section>
               <section className="p-4">
                   <p>{article.body}</p>
                 <section className="flex justify-center flex-wrap gap-4 items-center pt-4">
