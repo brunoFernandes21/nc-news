@@ -3,16 +3,16 @@ import ArticleCard from "./ArticleCard";
 import { fetchAllArticles } from "../utils/api";
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/Theme";
-import { useParams, useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import NotFound from "./NotFound";
 
 const ArticleList = () => {
   const { theme } = useContext(ThemeContext);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const { search } = useLocation();
-  const topic = new URLSearchParams(search).get("topic");
+  const [apiError, setApiError] = useState(null);
+  const { search } = useLocation()
+  const topic = new URLSearchParams(search).get("topic")
 
   useEffect(() => {
     if (topic === "coding") {
@@ -25,16 +25,16 @@ const ArticleList = () => {
       document.title = "Home";
     }
     setLoading(true);
-    setError(false);
+    setApiError(false);
     const getAllArticles = async () => {
       try {
         const articles = await fetchAllArticles(topic);
-        setError(false);
+        setApiError(false);
         setArticles(articles);
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setError(true);
+        setApiError(error);
       }
     };
     getAllArticles();
@@ -42,13 +42,14 @@ const ArticleList = () => {
 
   return (
     <main className={`${theme} pb-10 mb-0`}>
-      <header
-        className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${
-          theme === "dark" ? "text-white" : "text-red-600"
-        }`}
-      >
+      {!apiError && <div className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
         <h1>Welcome to Northcoders-News</h1>
-      </header>
+      </div>}
+      <div>
+        {apiError && (
+          <NotFound/>
+        )}
+      </div>
       {loading && (
         <h2
           className={`${
@@ -58,8 +59,9 @@ const ArticleList = () => {
           Loading Articles...
         </h2>
       )}
+      
       <section>
-        {error && (
+        {apiError && (
           <p
             className={` ${
               theme === "dark"

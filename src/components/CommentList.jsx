@@ -9,15 +9,21 @@ const CommentList = ({ article_id }) => {
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const { theme } = useContext(ThemeContext);
-  const [error, setError] = useState(false)
+  const [apiError, setApiError] = useState(null)
   const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     setLoading(true);
+    setApiError(null)
     const getComments = async () => {
-      const data = await fetchCommentsByArticleId(article_id);
-      setLoading(false);
-      setComments(data);
+      try {
+        const data = await fetchCommentsByArticleId(article_id);
+        setLoading(false);
+        setComments(data);
+      } catch (error) {
+        setApiError(error)
+        setLoading(false)
+      }
     };
     getComments();
   }, []);
@@ -28,21 +34,21 @@ const CommentList = ({ article_id }) => {
     });
     setComments(filteredComments);
     try {
-      setError(false)
+      setApiError(false)
       setSuccess(true) 
       await deleteComment(comment_id)
       setTimeout(() => {
         setSuccess(false)
       }, 1000);
     } catch (error) {
-      setError(true)
+      setApiError(true)
       setSuccess(false)
       const unfilteredComments = comments.filter((comment) => {
         return comment
       });
       setComments(unfilteredComments);
       setTimeout(() => {
-        setError(false)
+        setApiError(false)
       }, 1000);
     } 
   };
@@ -58,6 +64,19 @@ const CommentList = ({ article_id }) => {
           Loading Comments...
         </h2>
       )}
+      {apiError && (
+        <p
+        className={` ${
+          theme === "dark"
+            ? "text-red-600 text-center rounded bg-white"
+            : "text-center rounded text-white bg-red-500 border-4 border-red-700"
+        } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
+      >
+        {apiError.response.status} 
+        <br />
+        {apiError.response.data.msg}
+      </p>
+      )}
       {!loading && (
         <section className="bg-blue">
           <section
@@ -69,7 +88,7 @@ const CommentList = ({ article_id }) => {
           >
             <h2>Comments</h2>
           </section>
-          {error && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
+          {apiError && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
           {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
           {comments.length === 0 ? (
             <h3
