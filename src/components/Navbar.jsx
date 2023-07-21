@@ -1,27 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Link} from "react-router-dom"
 import ToggleTheme from "./ToggleTheme";
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/Theme';
-import { UserContext } from '../contexts/User';
-const Navbar = () => {
+const Navbar = ({setSelectedTopic}) => {
   const { theme } = useContext(ThemeContext)
-  const { user } = useContext(UserContext)
+  const [topics, setTopics] = useState(["coding", "cooking", "football"])
+
   return (
-    <div className={`${theme === "dark" ? "bg-red-600 shadow-white" : "shadow-black bg-red-600"} shadow-md top-0 fixed z-50 w-full flex justify-between items-center flex-wrap text-white font-black p-2 px-4 md:p-6 md:px-20 `}>
-        <div>
+    <nav className={`${theme === "dark" ? "bg-red-600 shadow-white" : "shadow-black bg-red-600"} shadow-md top-0 fixed z-50 w-full flex justify-between items-center text-white font-black p-5 h-14 md:h-20 md:px-24`}>
           <Link className='text-2xl md:text-3xl ease-in-out duration-300 hover:text-gray-300' to={"/"}>NC NEWS</Link>
-        </div>
-        <div className='flex md:text-xl md:gap-4 justify-center items-center md:m-auto'>
-          <Link className='p-2 ease-in-out duration-300 hover:text-gray-300' to={"/"} >Coding</Link>
-          <Link className='p-2 ease-in-out duration-300 hover:text-gray-300' to={"/"} >Football</Link>
-          <Link className='p-2 ease-in-out duration-300 hover:text-gray-300' to={"/"} >Cooking</Link>
-          <ul className='p-2 cursor-pointer'><ToggleTheme/></ul>
-        </div>
-        <div className='text-center bg-white text-red-600 p-2 rounded'>
-          <p>Logged in as {user}</p>
-          </div>
-    </div>
+        <ul className='flex justify-center items-center gap-2 md:gap-4 '>
+        {topics.map((topic) => {
+          return <Link key={topic} className='capitalize p-2 ease-in-out duration-300 hover:text-gray-300 md:text-xl' to={`/articles?topic=${topic}`} >{topic}</Link>
+
+        })}
+      <ul className='p-2 cursor-pointer md:text-xl'><ToggleTheme/></ul>
+        </ul>
+    </nav>
   )
 }
 
