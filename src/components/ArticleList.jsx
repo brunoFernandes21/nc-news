@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { ThemeContext } from '../contexts/Theme';
 import { useParams, useSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import NotFound from "./NotFound";
 
 const ArticleList = () => {
   const { theme } = useContext(ThemeContext)
@@ -42,29 +43,20 @@ const ArticleList = () => {
 
   return (
     <div className={`${theme} pb-10 mb-0`}>
-      <div className={`mt-20 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
+      {!apiError && <div className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
         <h1>Welcome to Northcoders-News</h1>
+      </div>}
+      <div>
+        {apiError && (
+          <NotFound/>
+        )}
       </div>
       {loading && (
         <h2 className={`${theme === "dark" ? "text-white" : "text-red-600"} text-center font-black mt-10 text-2xl md:text-4xl`}>
           Loading Articles...
         </h2>
       )}
-            <div>
-        {apiError && (
-          <p
-            className={` ${
-              theme === "dark"
-                ? "text-red-600 text-center rounded bg-white"
-                : "text-center rounded text-white bg-red-500 border-4 border-red-700"
-            } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
-          >
-            {apiError.response.status} 
-            <br />
-            {apiError.response.data.msg}
-          </p>
-        )}
-      </div>
+      
       {!loading && (
         <main className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(

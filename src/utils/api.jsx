@@ -41,5 +41,11 @@ export const decrementVote = async (article_id) => {
 }
 
 export const postComment = async (newComment, article_id) => {
-  await articlesApi.post(`/article/${article_id}/comments`, newComment)
+  const response = await articlesApi.post(`/articles/${article_id}/comments`, newComment)
+  const data = response.data.comment
+  return data
+}
+
+export const deleteComment = async (comment_id) => {
+  await articlesApi.delete(`/comments/${comment_id}`)
 }
