@@ -239,7 +239,7 @@ const SingleArticle = () => {
                 onSubmit={handleSubmit}
               >
                 <div>
-                  <p className="font-bold text-center mb-5 text-red-500">
+                  <p className={`font-bold text-center mb-5 text-red-500 md:text-xl ${theme === "dark" ? "text-white" : ""}`}>
                     Share your thoughts below!
                   </p>
                 </div>

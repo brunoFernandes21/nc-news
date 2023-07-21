@@ -4,8 +4,8 @@ const articlesApi = axios.create({
   baseURL: "https://brunofernandes-northcoders-news.onrender.com/api"
 })
 
-export const fetchAllArticles = async () => {
-  const response = await articlesApi.get("/articles")
+export const fetchAllArticles = async (topic) => {
+  const response = await articlesApi.get("/articles", {params: {topic: topic}})
   const articles = response.data.articles
   return articles
 }
