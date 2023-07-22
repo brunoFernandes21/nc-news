@@ -10,9 +10,11 @@ const ToggleTheme = () => {
     });
   };
   return (
-    <button className="flex">
-      <BsFillMoonStarsFill onClick={ToggleTheme} className={`${theme === "dark" ? "text-white" : "text-black"}`} aria-label="click to change theme"/>
-    </button>
+    <BsFillMoonStarsFill
+      onClick={ToggleTheme}
+      className={`${theme === "dark" ? "text-white" : "text-black"} flex`}
+      aria-label="click to change theme"
+    />
   );
 };
 

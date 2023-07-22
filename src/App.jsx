@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import DesktopNavbar from "./components/DesktopNavbar";
 import Footer from "./components/Footer";
 import ArticleList from "./components/ArticleList";
 import { Route, Routes } from "react-router";
@@ -12,7 +12,7 @@ function App() {
   const { theme } = useContext(ThemeContext)
   return (
     <div className={`app h-screen flex flex-col justify-between ${theme}`}>
-      <Navbar/>
+      <DesktopNavbar/>
       <Routes>
         <Route path="/" element={<ArticleList />} />
         <Route path="/articles/:article_id" element={<SingleArticle />} />

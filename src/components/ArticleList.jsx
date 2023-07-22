@@ -41,9 +41,12 @@ const ArticleList = () => {
   }, [topic]);
 
   return (
-    <main className={`${theme} pb-10 mb-0`}>
-      {!apiError && <div className={`mt-28 md:mb-14 md:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
-        <h1>Welcome to Northcoders-News</h1>
+    <main className={`${theme} pb-10 mb-0 bg-blue-500 mt-0 pt-0`}>
+      {!apiError && !loading  && topic ==null && <div className={`mt-20 md:mb-14 md:mt-28 lg:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
+        <h1>Welcome to Northcoders News</h1>
+      </div>}
+      {!apiError && !loading  && topic !==null  && <div className={`mt-20 md:mb-14 md:mt-28 lg:mt-32 text-center font-black text-xl md:text-2xl lg:text-4xl ${theme === "dark" ? "text-white" : "text-red-600"}`}>
+        <h1>Articles about <span className={`p-2 rounded ${theme === "dark" ? "bg-white text-red-500" : "bg-red-600 text-white"}`}>{topic}</span></h1>
       </div>}
       <div>
         {apiError && (
@@ -59,6 +62,7 @@ const ArticleList = () => {
           Loading Articles...
         </h2>
       )}
+      
       {!loading && (
         <section className="grid gap-4 w-11/12 m-auto mt-5 md:grid-cols-2 lg:grid-cols-3">
           {articles.map(
