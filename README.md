@@ -24,9 +24,11 @@ In the future I hope to be able to implement user authentication to make the app
 ```npm run dev```
 
 ## Example package.json
-![Alt text](<Screenshot 2023-07-22 at 20.50.41.png>)
+
+![Alt text](<Screenshot 2023-07-22 at 20.57.45.png>)
 
 ## How to Use the Project
+
 When the application first load, you will be presented with a list of all the articles. You can view articles by topic by selecting a topic from the main navigation bar on the top of the page(desktop). If on mobile, click the white icon on the right hand side of the navigation bar to toggle mobile navigation. From there, you can select desired topic and it will show the articles associated with that topic.
 
 From the home page or when views articles by topic, you can click on an article to read its content. When viewing an individual article you can like it, dislike it, leave a comment and delete your own comment/s. You can click the comments icon under the comment box to view  a list of all comments associated with that article.
@@ -39,12 +41,15 @@ After posting a comment, you can see a list of all the comments, including yours
 ## Author
 
 Bruno Fernandes
+
 GitHub: https://github.com/brunoFernandes21
+
 LinkedIn: https://linkedin.com/in/bruno-fernandes-879b0725a
+
 ## Support
 
 If while using this application you run into any type of errors, please get in touch via GitHub or email brunoaf15@gmail.com
 
 ## Acknowledgement 
 
-I would like to say thank you to Northcorders for the opportunity to take the course and build this Full Stack application as my Front End project. 
+I would like to say thank you to Northcorders for the opportunity they gave me to take the course and build this Full Stack application as my Front End project. 
