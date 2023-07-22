@@ -39,7 +39,7 @@ const CommentList = ({ article_id }) => {
       await deleteComment(comment_id)
       setTimeout(() => {
         setSuccess(false)
-      }, 1000);
+      }, 2000);
     } catch (error) {
       setApiError(true)
       setSuccess(false)
@@ -49,7 +49,7 @@ const CommentList = ({ article_id }) => {
       setComments(unfilteredComments);
       setTimeout(() => {
         setApiError(false)
-      }, 1000);
+      }, 2000);
     } 
   };
 
@@ -63,19 +63,6 @@ const CommentList = ({ article_id }) => {
         >
           Loading Comments...
         </h2>
-      )}
-      {apiError && (
-        <p
-        className={` ${
-          theme === "dark"
-            ? "text-red-600 text-center rounded bg-white"
-            : "text-center rounded text-white bg-red-500 border-4 border-red-700"
-        } font-bold mx-4 mt-10 p-6 md:p-10 md:m-auto md:text-xl md:w-5/12`}
-      >
-        {apiError.response.status} 
-        <br />
-        {apiError.response.data.msg}
-      </p>
       )}
       {!loading && (
         <section className="bg-blue">

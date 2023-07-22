@@ -21,7 +21,7 @@ const MobileNavBar = ({ showNav, toggleShowNav }) => {
   return (
     <nav className={` ${showNav ? "show__nav" : ""} mobile__nav `}>
       <ul
-        className={`links mt-16 md:mt-20 ${
+        className={`links ${
           theme === "dark" ? "bg-slate-800" : "bg-white"
         }`}
       >
@@ -38,7 +38,7 @@ const MobileNavBar = ({ showNav, toggleShowNav }) => {
       </ul>
 
       <ul className="socials flex flex-col">
-        <p className={` ${theme === "dark" ? "bg-white text-red-500" : "bg-red-500 text-white"} bg-red font-bold text-xl rounded p-2 `}>Welcome {user}</p>
+        <p className={` ${theme === "dark" ? "bg-white text-red-500" : "bg-red-500 text-white"} bg-red font-bold text-xl rounded p-2 `}>Hello {user}</p>
         <li className="text-3xl flex justify-center items-center mt-4 gap-10 text-white">
           <Link to="https://github.com/brunoFernandes21" target="_blank">
             <AiFillGithub

@@ -50,7 +50,7 @@
   color: #232946;
 }
 /* Mobile navigation styles */
-@media only screen and (max-width: 1020px) {
+@media only screen and (max-width: 768px) {
   .nav__icon:hover {
     color: #232946;
   }
@@ -87,6 +87,104 @@
     width: 100%;
     height: 100vh;
     line-height: 3rem;
+    margin-top: 3.5rem;
+    top: 0;
+    display: block;
+    left: -200%;
+    box-shadow: 4px 4px 6px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+  }
+  nav .socials {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    left: -200%;
+    top: 23rem;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+  }
+  .socials li a {
+    margin: 0;
+  }
+  .dark .links > li {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+  }
+  .dark .links > li:last-child {
+    border-bottom: 1px solid black;
+  }
+
+  .links > li {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  .links > li:last-child {
+    border-bottom: 1px solid black;
+  }
+  .links li a {
+    font-size: 25px;
+    font-weight: 900;
+    transition: all 0.5s ease-in-out;
+  }
+  .links li a:hover {
+    padding-left: 2rem;
+  }
+  .show__nav .links {
+    left: 0;
+  }
+  .show__nav .socials {
+    left: 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1020px) {
+  .nav__icon:hover {
+    color: #232946;
+  }
+  .mobile__icon .nav__icon {
+    font-size: 20px;
+    color: white;
+  }
+  .mobile__icon:hover {
+    background-color: #ffffff;
+  }
+
+  .mobile__nav__icon:hover {
+    color: #232946;
+  }
+  .nav__icon:hover {
+    color: #232946;
+  }
+
+  .mobile__nav {
+    display: block;
+  }
+  .mobile__icon {
+    display: block;
+  }
+  nav > .desktop__links {
+    display: none;
+  }
+  .desktop__socials {
+    display: none;
+  }
+
+  nav .links {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    line-height: 3rem;
+    margin-top: 4.5rem;
     top: 0;
     display: block;
     left: -200%;

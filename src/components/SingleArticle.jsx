@@ -30,7 +30,8 @@ const SingleArticle = () => {
   const [apiError, setApiError] = useState(null);
   const [noArticleError, setNoArticleError] = useState(null);
   const [postError, setPostError] = useState(null);
-  const [deleteError, setDeleteError] = useState(null);
+  const [deleteError, setDeleteError] = useState(false);
+  const [success, setSuccess] = useState(false)
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
@@ -128,21 +129,29 @@ const SingleArticle = () => {
   };
   const handleDelete = async () => {
     setShowNewComment(false);
-    setDeleteError(null);
+    setDeleteError(false);
     setLoading(false);
+    setSuccess(true)
     try {
       await deleteComment(newComment_id);
+      setTimeout(() => {
+        setSuccess(false)
+      }, 2000);
     } catch (error) {
       setLoading(false);
-      setDeleteError(error);
+      setDeleteError(true);
+      setSuccess(false)
       setShowNewComment(true);
+      setTimeout(() => {
+        setDeleteError(false)
+      }, 2000);
     }
   };
   return (
     <main className={`mt-14 ${theme}`}>
-      {!noArticleError && (
+      {!noArticleError && !loading && (
         <section
-          className={`mt-5 md:mt-20 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
+          className={`mt-5 md:mt-10 lg:mt-16 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
             theme === "dark" ? "border-white" : "border-black"
           }`}
         >
@@ -361,43 +370,9 @@ const SingleArticle = () => {
                 </section>
               </section>
               )}
-              {deleteError && (
-                <p
-                className={` ${
-                  theme === "dark"
-                    ? "text-red-500 border-2 border-red-700 text-center p-2 rounded bg-white"
-                    : " rounded  bg-red-400 text-white border-2 border-red-700"
-                } font-bold mt-4 p-2 text-center`}
-              >
-                Oops, something has gone wrong. Please try again!
-              </p>
-              )}
-              {/* {showNewComment && (
-                  <section
-                  className={`${
-                    theme === "dark"
-                      ? "bg-white text-black hover:shadow-white"
-                      : "bg-red-500 text-white hover:shadow-black"
-                  } p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
-                >
-                  <p className="w-11/12">{newComment.body}</p>
-                  {user === newComment.username && (
-                    <span>
-                    <FaTrashAlt onClick={handleDelete} className={`ease-in duration-300 hover:scale-150 text-xl absolute right-0 top-0 mr-4 mt-4 cursor-pointer ${theme === "dark" ? "text-red-600 hover:" : ""}`}/>
-                    </span>
-                  )}
-                  <section className="mt-2 flex gap-4">
-                    <p>
-                      Comment by <strong>{newComment.username}</strong>
-                    </p>
-                    <span>.</span>
-                    <p>
-                      <strong>Likes</strong> 0
-                    </p>
-                  </section>
-                </section>
-                )} */}
-      
+
+              {deleteError && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
+              {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
               <section>
                 <section
                   className={`font-bold text-center mt-5 mb-8  ${
