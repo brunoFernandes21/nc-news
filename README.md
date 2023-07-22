@@ -27,6 +27,7 @@ In the future I hope to be able to implement user authentication to make the app
 
 ![Alt text](<Screenshot 2023-07-22 at 20.57.45.png>)
 
+
 ## How to Use the Project
 
 When the application first load, you will be presented with a list of all the articles. You can view articles by topic by selecting a topic from the main navigation bar on the top of the page(desktop). If on mobile, click the white icon on the right hand side of the navigation bar to toggle mobile navigation. From there, you can select desired topic and it will show the articles associated with that topic.
