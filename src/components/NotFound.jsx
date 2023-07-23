@@ -5,7 +5,7 @@ const NotFound = () => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <main className={`p-10 mt-60 font-bold block text-center m-auto ${theme === "dark" ? "text-white" : "text-red-500"}`}>
+    <main className={`p-10 font-bold block text-center m-auto ${theme === "dark" ? "text-white" : "text-red-500"}`}>
         <p className='text-8xl'>404</p>
         <p className='text-4xl'>Not Found: Page does not exist</p>
         <p className='text-xl'>Go to the <Link className='underline' to={'/'}>Homepage</Link>.</p>

@@ -195,21 +195,22 @@ const SingleArticle = () => {
               </p>
             </section>
             <section className="w-11/12 mt-2 m-auto md:w-11/12 lg:w-3/5 ">
-              <section
-                className={`grid ease-in duration-300 rounded-t-lg md:rounded-none ${
-                  theme === "dark"
-                    ? "bg-white text-black shadow-md hover:shadow-white"
-                    : "bg-red-500 text-white"
-                }`}
-              >
-                <section className="m-auto md:border-8 md:border-white">
+            <section className="m-auto md:mb-2 flex items-center justify-center">
                 <img
-                  className="rounded-t-lg md:rounded-none"
+                  className="rounded-t-lg lg:rounded md:border-4 md:border-red-500"
                   src={article.article_img_url}
                   alt={pageTitle}
                 />
                 </section>
-                <section className="p-4">
+              <section
+                className={`grid ease-in duration-300 md:rounded-lg ${
+                  theme === "dark"
+                    ? "bg-white text-black shadow-md hover:shadow-white"
+                    : "bg-red-500 text-white shadow-md hover:shadow-black"
+                }`}
+              >
+                
+                <section className="p-4 ">
                     <p>{article.body}</p>
                   <section className="flex justify-center flex-wrap  items-center gap-2 pt-4">
                     <section className="flex gap-2 items-center">
