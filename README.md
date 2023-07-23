@@ -2,6 +2,12 @@
 
 Northcoders News is the Frontend of a Full Stack Application. It is a social news aggregation, web content rating and discussion website.
 
+## Live version 
+https://bruno-northcoders-news.netlify.app/
+
+## Back end repo
+https://github.com/brunoFernandes21/northcoders-news
+
 ## Project Description
 
 Northcoders News has articles which are divided into topics, and each article has user-curated ratings from upvotes and downvotes using an API.
@@ -14,10 +20,13 @@ The technologies I used to build this project includes React, Express, PSQL, Nod
 
 In the future I hope to be able to implement user authentication to make the application complete. 
 
-## How to Install and Run the Application
 
+## How to Install and Run the Application
+Minimum version of [Node] required to run locally [19.8.1]
 1 - Clone the Repository to you local machine
+```git clone <repo-url>```
 2 - cd into the cloned folder
+```cd <folder-name>```
 3 - Run the following command to install all the required dependencies to run the project locally
 ```npm install```
 4 - By running the following command, vite server should start on localhost:5173 
