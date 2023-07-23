@@ -27,6 +27,7 @@ const Navbar = () => {
         } shadow-md top-0 fixed z-50 w-full flex justify-between items-center flex-wrap text-white font-black p-2 px-4 md:p-4 md:px-10 lg:p-6 lg:px-14 `}
       >
         <Link
+          onClick={() => setShowNav(false)}
           className="text-2xl md:text-3xl ease-in-out duration-300 hover:text-gray-300"
           to={"/"}
         >
@@ -66,7 +67,7 @@ const Navbar = () => {
           <FaBars onClick={toggleShowNav} className="nav__icon" />
         </button>
       </nav>
-      <MobileNavBar showNav={showNav} toggleShowNav={toggleShowNav} />
+      <MobileNavBar showNav={showNav} setShowNav={setShowNav} />
     </div>
   );
 };

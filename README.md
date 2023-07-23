@@ -28,7 +28,7 @@ In the future I hope to be able to implement user authentication to make the app
 ![Alt text](<Screenshot 2023-07-22 at 20.57.45.png>)
 
 
-## How to Use the Project
+## A brief description of the functionalities
 
 When the application first load, you will be presented with a list of all the articles. You can view articles by topic by selecting a topic from the main navigation bar on the top of the page(desktop). If on mobile, click the white icon on the right hand side of the navigation bar to toggle mobile navigation. From there, you can select desired topic and it will show the articles associated with that topic.
 
@@ -44,7 +44,6 @@ After posting a comment, you can see a list of all the comments, including yours
 Bruno Fernandes
 
 GitHub: https://github.com/brunoFernandes21
-
 LinkedIn: https://linkedin.com/in/bruno-fernandes-879b0725a
 
 ## Support
@@ -53,4 +52,4 @@ If while using this application you run into any type of errors, please get in t
 
 ## Acknowledgement 
 
-I would like to say thank you to Northcorders for the opportunity they gave me to take the course and build this Full Stack application as my Front End project. 
+I would like to say thank you to Northcorders for the opportunity they gave me to take the course and build this application as my Front End project. 

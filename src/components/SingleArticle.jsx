@@ -271,9 +271,9 @@ const SingleArticle = () => {
                   </section>
                 </section>
               </section>
-              <section className="mt-10">
+              <section className="mt-10 m-auto md:max-w-2xl">
                 <form
-                  className={` border rounded p-4 ${
+                  className={`border px-6 py-8 rounded shadow-md w-full${
                     theme === "dark" ? "" : "border-red-500 "
                   } `}
                   onSubmit={handleSubmit}
@@ -283,14 +283,14 @@ const SingleArticle = () => {
                       Share your thoughts below!
                     </p>
                   </section>
-                  <section className="md:flex md:justify-space-between md:items-center">
-                    <section className="md:flex">
+                  <section >
+                    <section >
                         <label htmlFor="username" className="font-medium">
                           Username
                         </label>
                       <section>
                         <input
-                          className={`block focus:ring-red-500 focus:border-red-500 border-red-500  font-medium border  p-2 rounded-lg w-full ${
+                          className={`block focus:ring-red-500 focus:border-red-500 border-red-500  font-medium border mt-2 p-2 rounded-lg w-full ${
                             theme === "dark" ? "text-black" : ""
                           }`}
                           id="username"
@@ -302,12 +302,12 @@ const SingleArticle = () => {
                         />
                       </section>
                     </section>
-                    <section className="mt-4 md:flex">
+                    <section className="mt-4">
                         <label htmlFor="body" className="font-medium">
                           Content
                         </label>
                         <textarea
-                          className={`border block font-medium  p-2 rounded-lg w-full ${
+                          className={`border block font-medium mt-2  p-2 rounded-lg w-full ${
                             theme === "dark"
                               ? "text-black focus:ring-red-500 focus:border-red-500 border-red-500"
                               : "focus:ring-red-500 focus:border-red-500 border-red-500"

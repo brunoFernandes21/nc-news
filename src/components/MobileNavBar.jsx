@@ -9,7 +9,7 @@ import { UserContext } from "../contexts/User";
 import { Link } from "react-router-dom";
 import ToggleTheme from "./ToggleTheme";
 
-const MobileNavBar = ({ showNav, toggleShowNav }) => {
+const MobileNavBar = ({ showNav, setShowNav}) => {
   const { theme } = useContext(ThemeContext);
   const [topics, setTopics] = useState([
     {topic: "coding", icon: <BiFootball/>},
@@ -31,7 +31,7 @@ const MobileNavBar = ({ showNav, toggleShowNav }) => {
               key={topic}
               className={`link capitalize `}
             >
-              <Link onClick={toggleShowNav} to={`/articles?topic=${topic}  `} className={`flex gap-4 justify-center items-center flex-row`}>{topic} {icon}</Link>
+              <Link onClick={() => setShowNav(false)} to={`/articles?topic=${topic}  `} className={`flex gap-4 justify-center items-center flex-row`}>{topic} {icon}</Link>
             </li>
           );
         })}
