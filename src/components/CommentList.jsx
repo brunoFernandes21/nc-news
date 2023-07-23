@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import CommentCard from "./CommentCard";
 import { useState, useEffect } from "react";
 import { deleteComment, fetchCommentsByArticleId } from "../utils/api";

@@ -210,17 +210,19 @@ const SingleArticle = () => {
                 </section>
                 <section className="p-4">
                     <p>{article.body}</p>
-                  <section className="flex justify-center flex-wrap gap-4 items-center pt-4">
-                    <section className="flex gap-4 items-center">
+                  <section className="flex justify-center flex-wrap  items-center gap-2 pt-4">
+                    <section className="flex gap-2 items-center">
                       <p>
                         <strong>Topic:</strong> {article.topic}
                       </p>
+                      <span>.</span>
                       <p>
                         <strong>Comments:</strong> {article.comment_count}
                       </p>
                     </section>
+                    <span className="max-sm:hidden flex">.</span>
                     <section className="flex gap-4">
-                      <section className=" flex ">
+                      <section className="flex">
                         <button
                           className={
                             like > 0
@@ -238,7 +240,7 @@ const SingleArticle = () => {
                         <p>{article.votes + like}</p>
                       </section>
       
-                      <section className="flex">
+                      <section>
                         <button
                           className={
                             dislike > 0
@@ -304,7 +306,7 @@ const SingleArticle = () => {
                     </section>
                     <section className="mt-4">
                         <label htmlFor="body" className="font-medium">
-                          Content
+                          Comment
                         </label>
                         <textarea
                           className={`border block font-medium mt-2  p-2 rounded-lg w-full ${

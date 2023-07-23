@@ -44,6 +44,7 @@ After posting a comment, you can see a list of all the comments, including yours
 Bruno Fernandes
 
 GitHub: https://github.com/brunoFernandes21
+
 LinkedIn: https://linkedin.com/in/bruno-fernandes-879b0725a
 
 ## Support
