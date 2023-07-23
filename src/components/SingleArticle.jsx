@@ -43,6 +43,7 @@ const SingleArticle = () => {
   });
 
   useEffect(() => {
+    window.scrollTo(0,0);
     document.title = "Single Article";
     setLoading(true);
     setNoArticleError(null);
@@ -151,7 +152,7 @@ const SingleArticle = () => {
     <main className={`mt-14 ${theme}`}>
       {!noArticleError && !loading && (
         <section
-          className={`mt-5 md:mt-10 lg:mt-16 border-2 ml-5 md:ml-10  rounded p-2 w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
+          className={`text-sm w-32 p-1 text-center mt-5 md:mt-10 lg:mt-16 border-2 ml-5 md:ml-10 rounded md:p-2 md:text-base md:w-36 ease-in duration-100 hover:text-red-500 hover:border-red-500 ${
             theme === "dark" ? "border-white" : "border-black"
           }`}
         >
