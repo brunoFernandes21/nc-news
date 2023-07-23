@@ -22,6 +22,7 @@ In the future I hope to be able to implement user authentication to make the app
 
 
 ## How to Install and Run the Application
+
 Minimum version of [Node] required to run locally [19.8.1]
 1 - Clone the Repository to you local machine
 ```git clone <repo-url>```
