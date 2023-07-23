@@ -15,6 +15,7 @@ const ArticleList = () => {
   const topic = new URLSearchParams(search).get("topic")
 
   useEffect(() => {
+    window.scrollTo(0,0);
     if (topic === "coding") {
       document.title = "Coding";
     } else if (topic === "cooking") {
