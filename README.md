@@ -58,7 +58,7 @@ LinkedIn: https://linkedin.com/in/bruno-fernandes-879b0725a
 
 ## Support
 
-If while using this application you run into any type of errors, please get in touch via GitHub or email brunoaf15@gmail.com
+If while using this application you run into any type of errors, please get in touch via GitHub or email brunoaf1523@gmail.com
 
 ## Acknowledgement 
 
