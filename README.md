@@ -23,21 +23,21 @@ In the future I hope to be able to implement user authentication to make the app
 
 ## How to Install and Run the Application
 
-Minimum version of [Node] required to run locally [19.8.1]
+Minimum version of ```None``` required to run locally ```19.8.1```
 1 - Clone the Repository to you local machine
 ```git clone <repo-url>```
 2 - cd into the cloned folder
 ```cd <folder-name>```
 3 - Run the following command to install all the required dependencies to run the project locally
 ```npm install```
-4 - By running the following command, vite server should start on localhost:5173 
+4 - By running the following command, vite server should start on localhost:5173
 ```npm run dev```
 
 ## Example package.json
 
 ![Alt text](<src/assets/Screenshot 2023-07-22 at 20.57.45.png>)
 
-## Brief description of the functionalities
+# Brief description of the functionalities
 
 When the application first load, you will be presented with a list of all the articles. You can view articles by topic by selecting a topic from the main navigation bar on the top of the page(desktop). If on mobile, click the white icon on the right hand side of the navigation bar to toggle mobile navigation. From there, you can select desired topic and it will show the articles associated with that topic.
 
