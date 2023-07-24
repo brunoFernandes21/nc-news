@@ -46,8 +46,8 @@ const Navbar = () => {
           })}
         </ul>
         <ul className="desktop__socials justify-center items-center">
-          <div className="text-3xl flex justify-center items-center gap-8 text-white">
-            <p className="text-base">Hello {user}</p>
+          <div className="text-3xl flex justify-center items-center gap-4 text-white">
+            <p className="text-base">{user}</p>
             <Link to="https://github.com/brunoFernandes21" target="_blank">
               <AiFillGithub className=" hover:text-gray-300 hover:cursor-pointer ease-in-out duration-300" />
             </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
             >
               <AiFillLinkedin className="hover:text-gray-300 hover:cursor-pointer ease-in-out duration-300" />
             </Link>
-            <button className="darkMode flex p-2 cursor-pointer text-xl md:text-2xl">
+            <button className="darkMode flex cursor-pointer text-xl md:text-2xl">
               <ToggleTheme />
             </button>
           </div>
