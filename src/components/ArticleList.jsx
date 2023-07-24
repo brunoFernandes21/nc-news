@@ -14,17 +14,15 @@ const ArticleList = () => {
   const { search } = useLocation()
   const topic = new URLSearchParams(search).get("topic")
 
+  const setPageTitle = (topic) => {
+    if(topic === null) {
+      return document.title = "Home"
+    }
+    return document.title = topic.charAt(0).toUpperCase() + topic.slice(1)
+  }
   useEffect(() => {
     window.scrollTo(0,0);
-    if (topic === "coding") {
-      document.title = "Coding";
-    } else if (topic === "cooking") {
-      document.title = "Cooking";
-    } else if (topic === "football") {
-      document.title = "Football";
-    } else if (topic === null) {
-      document.title = "Home";
-    }
+    setPageTitle(topic)
     setLoading(true);
     setApiError(false);
     const getAllArticles = async () => {

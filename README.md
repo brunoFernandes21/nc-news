@@ -35,7 +35,7 @@ Minimum version of [Node] required to run locally [19.8.1]
 
 ## Example package.json
 
-![Alt text](<Screenshot 2023-07-22 at 20.57.45.png>)
+![Alt text](<src/assets/Screenshot 2023-07-22 at 20.57.45.png>)
 
 
 ## A brief description of the functionalities
