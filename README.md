@@ -3,7 +3,7 @@
 Northcoders News is the Frontend of a Full Stack Application. It is a social news aggregation, web content rating and discussion website.
 
 ## Live version 
-https://bruno-fernandes.netlify.app
+https://www.bfnc-news.com
 
 ## Back end repo
 https://github.com/brunoFernandes21/northcoders-news
