@@ -33,7 +33,7 @@ const SingleArticle = () => {
   const [deleteError, setDeleteError] = useState(false);
   const [success, setSuccess] = useState(false)
   const [like, setLike] = useState(0);
-  const[isLike, setIsLike] = useState(false)
+  const [isLike, setIsLike] = useState(false)
   const [isDislike, setIsDislike] = useState(false)
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
@@ -91,51 +91,139 @@ const SingleArticle = () => {
       setPostError(error);
     }
   };
-  const handleLikeDislike = async (param) => {
-    if (param === "like") {
-      setLike((currentLikeCount) => {
-        return currentLikeCount + 1;
-      });
+  const handleLike = async () => {
+    if(isDislike) {
+      setDislike((currentDislikeCount) => {
+        return currentDislikeCount - 1
+      })
       setIsDislike(false)
-      setIsLike(true)
+    }
+    if(isLike) {
+      setLike((currentLikeCount) => {
+        return currentLikeCount - 1;
+      });
+      setIsLike(false)
       try {
-        setApiError(null);
-        await incrementVote(article_id);
-        setIsDislike(false)
-        setIsLike(true)
+        setApiError(false);
+        await decrementVote(article_id);
       } catch (error) {
         setLike((currentlikeCount) => {
-          return currentlikeCount - 1;
+          return currentlikeCount + 1;
         });
-        setIsLike(false)
+        setIsLike(true)
         setIsDislike(false)
         setApiError(error);
       }
+
     } else {
-      setDislike((currentDislikeCount) => {
-        return currentDislikeCount + 1;
+      setLike((currentLikeCount) => {
+        return currentLikeCount + 1;
       });
-      setLike((currentlikeCount) => {
-        return currentlikeCount - 1;
+      setIsLike(true)
+        try {
+          setApiError(null);
+          await incrementVote(article_id);
+          setIsDislike(false)
+          setIsLike(true)
+        } catch (error) {
+          setLike((currentlikeCount) => {
+            return currentlikeCount - 1;
+          });
+          setIsLike(false)
+          setIsDislike(false)
+          setApiError(error);
+        }
+    }
+
+  }
+
+  const handleDislike = async () => {
+    if(isLike) {
+      setLike((currentLikeCount) => {
+        return currentLikeCount - 1;
       });
       setIsLike(false)
       setIsDislike(true)
       try {
         setApiError(false);
         await decrementVote(article_id);
-        setIsDislike(true)
       } catch (error) {
-        setDislike((currentDeslikeCount) => {
-          return currentDeslikeCount - 1;
-        });
         setLike((currentlikeCount) => {
           return currentlikeCount + 1;
         });
+        setIsLike(false)
         setIsDislike(false)
-        setIsLike(true)
         setApiError(error);
       }
+    } 
+    if(isDislike) {
+      setDislike((currentDislikeCount) => {
+        return currentDislikeCount - 1
+      })
+      setIsDislike(false)
+    }else {
+      setDislike((currentDislikeCount) => {
+        return currentDislikeCount + 1
+      })
+      setIsDislike(true)
     }
+  }
+  const handleLikeDislike = (param) => {
+    if(param === "like") {
+      handleLike()
+    }else {
+      handleDislike()
+    }
+
+    // }
+      // if (param === "like") {
+      //   setLike((currentLikeCount) => {
+      //     return currentLikeCount + 1;
+      //   });
+      //   setIsDislike(false)
+      //   setIsLike(true)
+      //   try {
+      //     setApiError(null);
+      //     await incrementVote(article_id);
+      //     setIsDislike(false)
+      //     setIsLike(true)
+      //   } catch (error) {
+      //     setLike((currentlikeCount) => {
+      //       return currentlikeCount - 1;
+      //     });
+      //     setIsLike(false)
+      //     setIsDislike(false)
+      //     setApiError(error);
+      //   }
+      // }else {
+      //   setDislike((currentDislikeCount) => {
+      //     return currentDislikeCount + 1;
+      //   });
+      //   setLike((currentlikeCount) => {
+      //     return currentlikeCount - 1;
+      //   });
+      //   setIsLike(false)
+      //   setIsDislike(true)
+      //   try {
+      //     setApiError(false);
+      //     await decrementVote(article_id);
+      //     setIsDislike(true)
+      //   } catch (error) {
+      //     setDislike((currentDeslikeCount) => {
+      //       return currentDeslikeCount - 1;
+      //     });
+      //     setLike((currentlikeCount) => {
+      //       return currentlikeCount + 1;
+      //     });
+      //     setIsDislike(false)
+      //     setIsLike(true)
+      //     setApiError(error);
+      //   }
+      // }
+    
+      
+       
+    
   };
   const toggleShowComments = () => {
     setShowComments(!showComments);
@@ -236,8 +324,8 @@ const SingleArticle = () => {
                       </p>
                     </section>
                     <span className="max-sm:hidden flex">.</span>
-                    <section className="flex gap-2 bg-gray-500 rounded-full p-1 px-2">
-                      <section className="flex">
+                    <section className="flex gap-2 bg-gray-500 rounded-full p-1">
+                      <section className="flex pl-2">
                         <button
                           className={` ${theme === "dark" && isLike ? "text-black" : ""} text-sm cursor-pointer flex ${isLike ? "text-black" : "text-white"}`}
                           aria-label="like this comment"
@@ -245,9 +333,9 @@ const SingleArticle = () => {
                         >
                           <AiFillLike className={`text-2xl mr-2 `} />
                         </button>
-                        <p>{article.votes + like}</p>
+                        <p className={` font-bold ${theme === "dark" ? "text-white" : ""}`}>{article.votes + like}</p>
                       </section>
-                      <span>|</span>
+                      <span className={` font-bold ${theme === "dark" ? "text-white" : ""}`}>|</span>
                       <section>
                         <button
                           className={` ${theme === "dark" && isDislike ? "text-black" : ""} text-sm cursor-pointer flex ${isDislike ? "text-black" : "text-white"}`}
