@@ -12,14 +12,14 @@ import ToggleTheme from "./ToggleTheme";
 const MobileNavBar = ({ showNav, setShowNav }) => {
   const { theme } = useContext(ThemeContext);
   const [topics, setTopics] = useState([
-    { topic: "coding", icon: <BiFootball /> },
+    { topic: "coding", icon:  <IoLogoReact />},
     { topic: "cooking", icon: <GiCampCookingPot /> },
-    { topic: "football", icon: <IoLogoReact /> },
+    { topic: "football", icon:  <BiFootball /> },
   ]);
   const { user } = useContext(UserContext);
 
   return (
-    <nav className={` ${showNav ? "show__nav" : ""} mobile__nav `}>
+    <nav className={`${showNav ? "show__nav" : ""} mobile__nav `}>
       <ul className={`links ${theme === "dark" ? "bg-slate-800" : "bg-white"}`}>
         {topics.map(({ topic, icon }) => {
           return (

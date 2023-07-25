@@ -33,6 +33,8 @@ const SingleArticle = () => {
   const [deleteError, setDeleteError] = useState(false);
   const [success, setSuccess] = useState(false)
   const [like, setLike] = useState(0);
+  const[isLike, setIsLike] = useState(false)
+  const [isDislike, setIsDislike] = useState(false)
   const [dislike, setDislike] = useState(0);
   const { article_id } = useParams();
 
@@ -94,13 +96,19 @@ const SingleArticle = () => {
       setLike((currentLikeCount) => {
         return currentLikeCount + 1;
       });
+      setIsDislike(false)
+      setIsLike(true)
       try {
         setApiError(null);
         await incrementVote(article_id);
+        setIsDislike(false)
+        setIsLike(true)
       } catch (error) {
         setLike((currentlikeCount) => {
           return currentlikeCount - 1;
         });
+        setIsLike(false)
+        setIsDislike(false)
         setApiError(error);
       }
     } else {
@@ -110,9 +118,12 @@ const SingleArticle = () => {
       setLike((currentlikeCount) => {
         return currentlikeCount - 1;
       });
+      setIsLike(false)
+      setIsDislike(true)
       try {
         setApiError(false);
         await decrementVote(article_id);
+        setIsDislike(true)
       } catch (error) {
         setDislike((currentDeslikeCount) => {
           return currentDeslikeCount - 1;
@@ -120,6 +131,8 @@ const SingleArticle = () => {
         setLike((currentlikeCount) => {
           return currentlikeCount + 1;
         });
+        setIsDislike(false)
+        setIsLike(true)
         setApiError(error);
       }
     }
@@ -223,36 +236,22 @@ const SingleArticle = () => {
                       </p>
                     </section>
                     <span className="max-sm:hidden flex">.</span>
-                    <section className="flex gap-4">
+                    <section className="flex gap-2 bg-gray-500 rounded-full p-1 px-2">
                       <section className="flex">
                         <button
-                          className={
-                            like > 0
-                              ? "text-gray-400"
-                              : dislike > 0
-                              ? "text-gray-400"
-                              : "cursor-pointer flex"
-                          }
+                          className={` ${theme === "dark" && isLike ? "text-black" : ""} text-sm cursor-pointer flex ${isLike ? "text-black" : "text-white"}`}
                           aria-label="like this comment"
                           onClick={() => handleLikeDislike("like")}
-                          disabled={like > 0 || dislike > 0}
                         >
-                          <AiFillLike className="text-2xl mr-2" />
+                          <AiFillLike className={`text-2xl mr-2 `} />
                         </button>
                         <p>{article.votes + like}</p>
                       </section>
-      
+                      <span>|</span>
                       <section>
                         <button
-                          className={
-                            dislike > 0
-                              ? "text-gray-400"
-                              : like !== 0
-                              ? "text-gray-400"
-                              : "cursor-pointer flex"
-                          }
+                          className={` ${theme === "dark" && isDislike ? "text-black" : ""} text-sm cursor-pointer flex ${isDislike ? "text-black" : "text-white"}`}
                           aria-label="dislike this comment"
-                          disabled={like > 0 || dislike > 0}
                           onClick={() => handleLikeDislike("dislike")}
                         >
                           <AiFillDislike className="text-2xl mr-2" />
