@@ -298,7 +298,7 @@ const SingleArticle = () => {
             <section className="w-11/12 mt-2 m-auto md:w-11/12 lg:w-3/5 ">
             <section className="m-auto md:mb-2 flex items-center justify-center">
                 <img
-                  className="rounded-t-lg lg:rounded md:border-4 md:border-red-500"
+                  className="rounded-t-lg lg:rounded md:border-4 md:border-black"
                   src={article.article_img_url}
                   alt={pageTitle}
                 />
@@ -307,7 +307,7 @@ const SingleArticle = () => {
                 className={`grid ease-in duration-300 md:rounded-lg ${
                   theme === "dark"
                     ? "bg-white text-black shadow-md hover:shadow-white"
-                    : "bg-red-500 text-white shadow-md hover:shadow-black"
+                    : "bg-white text-black shadow-md hover:shadow-black"
                 }`}
               >
                 
@@ -324,21 +324,21 @@ const SingleArticle = () => {
                       </p>
                     </section>
                     <span className="max-sm:hidden flex">.</span>
-                    <section className="flex gap-2 bg-gray-500 rounded-full p-1">
+                    <section className="flex gap-2 bg-gray-400 rounded-full p-1">
                       <section className="flex pl-2">
                         <button
-                          className={` ${theme === "dark" && isLike ? "text-black" : ""} text-sm cursor-pointer flex ${isLike ? "text-black" : "text-white"}`}
+                          className={` ${theme === "dark" && isLike ? "text-black" : ""}ease-in duration-300 hover:scale-125 text-sm cursor-pointer flex ${isLike ? "text-black" : "text-white"}`}
                           aria-label="like this comment"
                           onClick={() => handleLikeDislike("like")}
                         >
                           <AiFillLike className={`text-2xl mr-2 `} />
                         </button>
-                        <p className={` font-bold ${theme === "dark" ? "text-white" : ""}`}>{article.votes + like}</p>
+                        <p className={` font-bold ${theme === "dark" ? "text-white" : "text-white"}`}>{article.votes + like}</p>
                       </section>
-                      <span className={` font-bold ${theme === "dark" ? "text-white" : ""}`}>|</span>
+                      <span className={` font-bold text-white`}>|</span>
                       <section>
                         <button
-                          className={` ${theme === "dark" && isDislike ? "text-black" : ""} text-sm cursor-pointer flex ${isDislike ? "text-black" : "text-white"}`}
+                          className={` ${theme === "dark" && isDislike ? "text-black" : ""}ease-in duration-300 hover:scale-125 text-sm cursor-pointer flex ${isDislike ? "text-black" : "text-white" }`}
                           aria-label="dislike this comment"
                           onClick={() => handleLikeDislike("dislike")}
                         >
@@ -364,24 +364,22 @@ const SingleArticle = () => {
               </section>
               <section className="mt-10 m-auto md:max-w-2xl">
                 <form
-                  className={`border px-6 py-8 rounded shadow-md w-full${
-                    theme === "dark" ? "" : "border-red-500 "
-                  } `}
+                  className={` bg-white border px-6 py-8 rounded shadow-md w-full`}
                   onSubmit={handleSubmit}
                 >
                   <section>
-                    <p className={`font-bold text-center mb-5 text-red-500 md:text-xl ${theme === "dark" ? "text-white" : ""}`}>
-                      Share your thoughts below!
+                    <p className={`font-bold text-center mb-5 text-red-500 md:text-xl `}>
+                      Share your thoughts below
                     </p>
                   </section>
                   <section >
                     <section >
-                        <label htmlFor="username" className="font-medium">
+                        <label htmlFor="username" className=" text-black font-medium">
                           Username
                         </label>
                       <section>
                         <input
-                          className={`block focus:ring-red-500 focus:border-red-500 border-red-500  font-medium border mt-2 p-2 rounded-lg w-full ${
+                          className={`block font-medium border mt-2 p-2 rounded-lg w-full ${
                             theme === "dark" ? "text-black" : ""
                           }`}
                           id="username"
@@ -394,14 +392,12 @@ const SingleArticle = () => {
                       </section>
                     </section>
                     <section className="mt-4">
-                        <label htmlFor="body" className="font-medium">
+                        <label htmlFor="body" className="text-black font-medium">
                           Comment
                         </label>
                         <textarea
                           className={`border block font-medium mt-2  p-2 rounded-lg w-full ${
-                            theme === "dark"
-                              ? "text-black focus:ring-red-500 focus:border-red-500 border-red-500"
-                              : "focus:ring-red-500 focus:border-red-500 border-red-500"
+                            theme === "dark" ? "text-black" : ""
                           }`}
                           id="body"
                           type="text"
@@ -468,7 +464,7 @@ const SingleArticle = () => {
                 <section
                   className={`font-bold text-center mt-5 mb-8  ${
                     theme === "dark"
-                      ? "text-white ease-in duration-100 hover:text-red-600 "
+                      ? "text-white ease-in duration-100 hover:text-red-500 "
                       : "text-red-600"
                   }`}
                 >
