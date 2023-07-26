@@ -438,7 +438,7 @@ const SingleArticle = () => {
                   theme === "dark"
                     ? "bg-white text-black hover:shadow-white"
                     : "bg-red-500 text-white hover:shadow-black"
-                } p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
+                } w-1/2 m-auto p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
               >
                 <p className="w-11/12">{newComment.body}</p>
                 {user === newComment.username && (
@@ -458,8 +458,8 @@ const SingleArticle = () => {
               </section>
               )}
 
-              {deleteError && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
-              {success && <p className={`text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
+              {deleteError && <p className={` w-1/2 m-auto text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-red-500 text-red-500 "}`}>Unable to delete comment. Please try again later!</p>}
+              {success && <p className={`w-1/2 m-auto text-center mt-4 p-2 border font-bold ${theme === "dark" ? "text-white " : "border-green-900 text-green-600"}`}>Comment deleted successfully!</p>}
               <section>
                 <section
                   className={`font-bold text-center mt-5 mb-8  ${
