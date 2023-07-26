@@ -16,9 +16,9 @@ const ArticleList = () => {
 
   const setPageTitle = (topic) => {
     if(topic === null) {
-      return document.title = "Home"
+      return document.title = "Home - BFNC-News"
     }
-    return document.title = topic.charAt(0).toUpperCase() + topic.slice(1)
+    return document.title = topic.charAt(0).toUpperCase() + topic.slice(1) + " - BFNC-News"
   }
   useEffect(() => {
     window.scrollTo(0,0);
