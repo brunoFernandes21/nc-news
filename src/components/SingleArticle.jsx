@@ -307,7 +307,7 @@ const SingleArticle = () => {
                 className={`grid ease-in duration-300 md:rounded-lg ${
                   theme === "dark"
                     ? "bg-white text-black shadow-md hover:shadow-white"
-                    : "bg-white text-black shadow-md hover:shadow-black"
+                    : "bg-white text-black shadow-md hover:shadow-gray-400"
                 }`}
               >
                 
@@ -437,7 +437,7 @@ const SingleArticle = () => {
                 className={`${
                   theme === "dark"
                     ? "bg-white text-black hover:shadow-white"
-                    : "bg-white text-black hover:shadow-black"
+                    : "bg-white text-black hover:shadow-gray-400"
                 } w-1/2 m-auto p-4 mt-4 shadow-md rounded-lg ease-in duration-300 relative`}
               >
                 <p className="w-11/12">{newComment.body}</p>

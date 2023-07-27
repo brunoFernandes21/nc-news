@@ -17,7 +17,7 @@ const ArticleCard = ({
   };
   return (
     <main
-      className={`${theme === "dark" ? "bg-white text-black shadow-md hover:shadow-white" : "text-black bg-white shadow-md hover:shadow-black"} rounded-lg cursor-pointer ease-in duration-300 hover:scale-105`}
+      className={`${theme === "dark" ? "bg-white text-black shadow-md hover:shadow-white" : "text-black bg-white shadow-md hover:shadow-gray-400"} rounded-lg cursor-pointer ease-in duration-300 hover:scale-105`}
       onClick={navigateTo}
     >
       <img

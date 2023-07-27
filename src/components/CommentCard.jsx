@@ -13,7 +13,7 @@ const CommentCard = ({ author, votes, body, comment_id, deleteComment }) => {
       className={`${
         theme === "dark"
           ? "bg-white text-black hover:shadow-white"
-          : "bg-white text-black hover:shadow-black"
+          : "bg-white text-black hover:shadow-gray-400"
       } p-4  shadow-md rounded-lg ease-in duration-300 relative`}
     >
       <p className="w-11/12">{body}</p>
