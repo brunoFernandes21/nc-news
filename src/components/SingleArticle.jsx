@@ -174,56 +174,6 @@ const SingleArticle = () => {
     }else {
       handleDislike()
     }
-
-    // }
-      // if (param === "like") {
-      //   setLike((currentLikeCount) => {
-      //     return currentLikeCount + 1;
-      //   });
-      //   setIsDislike(false)
-      //   setIsLike(true)
-      //   try {
-      //     setApiError(null);
-      //     await incrementVote(article_id);
-      //     setIsDislike(false)
-      //     setIsLike(true)
-      //   } catch (error) {
-      //     setLike((currentlikeCount) => {
-      //       return currentlikeCount - 1;
-      //     });
-      //     setIsLike(false)
-      //     setIsDislike(false)
-      //     setApiError(error);
-      //   }
-      // }else {
-      //   setDislike((currentDislikeCount) => {
-      //     return currentDislikeCount + 1;
-      //   });
-      //   setLike((currentlikeCount) => {
-      //     return currentlikeCount - 1;
-      //   });
-      //   setIsLike(false)
-      //   setIsDislike(true)
-      //   try {
-      //     setApiError(false);
-      //     await decrementVote(article_id);
-      //     setIsDislike(true)
-      //   } catch (error) {
-      //     setDislike((currentDeslikeCount) => {
-      //       return currentDeslikeCount - 1;
-      //     });
-      //     setLike((currentlikeCount) => {
-      //       return currentlikeCount + 1;
-      //     });
-      //     setIsDislike(false)
-      //     setIsLike(true)
-      //     setApiError(error);
-      //   }
-      // }
-    
-      
-       
-    
   };
   const toggleShowComments = () => {
     setShowComments(!showComments);
