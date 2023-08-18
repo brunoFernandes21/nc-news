@@ -23,7 +23,7 @@ const Navbar = () => {
         className={`${
           theme === "dark"
             ? "bg-red-600 shadow-white"
-            : "shadow-black bg-red-600"
+            : "shadow-gray-400 bg-red-600"
         } shadow-md top-0 fixed z-50 w-full flex justify-between items-center flex-wrap text-white font-black p-2 px-4 md:p-4 md:px-10 lg:p-6 lg:px-14 `}
       >
         <Link
